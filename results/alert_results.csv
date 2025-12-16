@@ -1,0 +1,25 @@
+time,ip,method,url,body,attack,confidence,severity,level
+2025-11-27T14:40:40+00:00,172.18.0.1,POST,/api/auth/login,username=hacker&password=SELECT * FROM users,SQL Injection,99.06,100,CRITICAL
+2025-11-28T04:46:34+00:00,172.18.0.1,GET,/api/users/,,Broken Authentication,99.70,70,HIGH
+2025-11-28T04:49:54+00:00,172.18.0.1,POST,/api/auth/login,username=hacker&password=SELECT * FROM users,SQL Injection,99.06,100,CRITICAL
+2025-11-28T05:10:50+00:00,172.18.0.1,POST,/api/users/,"{""email"": ""user1@gmail.com"", ""password"": ""user1""}",Broken Authentication,58.68,80,HIGH
+2025-11-28T05:12:31+00:00,172.18.0.1,POST,/api/users/,"{""email"": ""admin1@test.com"", ""password"": ""admin1"", ""role"": ""ADMIN""}",SQL Injection,47.46,95,CRITICAL
+2025-11-28T05:12:48+00:00,172.18.0.1,GET,/api/users/,,Broken Authentication,99.70,70,HIGH
+2025-11-28T05:15:20+00:00,172.18.0.1,GET,/api/users/,"{""email"": ""staff1@test.com"", ""password"": ""staff1"", ""role"": ""STAFF""}",SQL Injection,48.09,95,CRITICAL
+2025-11-28T05:15:31+00:00,172.18.0.1,POST,/api/users/,"{""email"": ""staff1@test.com"", ""password"": ""staff1"", ""role"": ""STAFF""}",SQL Injection,48.09,95,CRITICAL
+2025-11-28T05:15:34+00:00,172.18.0.1,GET,/api/users/,,Broken Authentication,99.70,70,HIGH
+2025-11-28T05:24:01+00:00,172.18.0.1,POST,/api/auth/login,username=hacker&password=SELECT * FROM users,SQL Injection,99.06,100,CRITICAL
+2025-11-28T05:24:40+00:00,172.18.0.10,GET,/api/users/by-email/admin1@gmail.com,,Broken Authentication,84.56,80,HIGH
+2025-11-28T05:24:40+00:00,172.18.0.1,POST,/api/auth/login,username=admin1%40gmail.com&password=admin1,Broken Authentication,76.10,85,HIGH
+2025-11-28T05:25:02+00:00,172.18.0.10,GET,/api/users/by-email/admin1@test.com,,Broken Authentication,85.58,80,HIGH
+2025-11-28T05:25:02+00:00,172.18.0.1,POST,/api/auth/login,username=admin1%40test.com&password=admin1,Broken Authentication,69.72,85,HIGH
+2025-11-28T05:29:28+00:00,172.18.0.1,GET,/api/users?=admin%27OR%271=1,,Broken Authentication,97.98,70,HIGH
+2025-11-28T05:29:28+00:00,172.18.0.1,GET,/api/users/?=admin%27OR%271=1,,Broken Authentication,98.10,70,HIGH
+2025-11-28T06:45:08+00:00,172.18.0.1,GET,/api/users?=admin%27OR%271=1,,Broken Authentication,97.98,70,HIGH
+2025-11-28T06:45:09+00:00,172.18.0.1,GET,/api/users/?=admin%27OR%271=1,,Broken Authentication,98.10,70,HIGH
+2025-11-28T06:49:50+00:00,172.18.0.10,GET,/api/users/by-email/user1@gmail.com,,Broken Authentication,98.41,80,HIGH
+2025-11-28T06:49:50+00:00,172.18.0.13,POST,/api/auth/login,username=user1%40gmail.com&password=user1,Broken Authentication,89.11,85,HIGH
+2025-11-28T06:50:10+00:00,172.18.0.10,GET,/api/users/by-email/admin1@test.com,,Broken Authentication,85.58,80,HIGH
+2025-11-28T06:50:10+00:00,172.18.0.13,POST,/api/auth/login,username=admin1%40test.com&password=admin1,Broken Authentication,69.72,85,HIGH
+2025-11-28T06:50:10+00:00,172.18.0.13,GET,/api/users/,,Broken Authentication,99.70,70,HIGH
+2025-11-28T04:54:10+00:00,172.18.0.1,GET,"/api/products?search=abc' UNION SELECT null,null,null",,SQL Injection,99.98,95,CRITICAL
