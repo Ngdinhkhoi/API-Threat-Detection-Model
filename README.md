@@ -17,20 +17,37 @@ rich
 
 Cấu trúc thư mục:
 
-project/
-│── src/
-│    ├── preprocess_clean.py
-│    ├── train_clean.py
-│    ├── infer_clean.py
-│    ├── utils_clean.py
-│── data/
-│    ├── bai.csv
-│    ├── SQL.csv
-│    ├── XSS.csv
-│    ├── commmand.csv
-│    ├── *optional: SQL_new.csv / XSS_new.csv / CMD_new.csv*
-│── dataset/
-│── models/
+├─ src/
+│ ├─ preprocess_clean.py
+│ ├─ train_clean.py
+│ ├─ infer_clean.py
+│ ├─ alert_parser.py
+│ ├─ alert_ws_server.py
+│ └─ utils_clean.py
+├─ data/
+│ ├─ SQL.csv
+│ ├─ XSS.csv
+│ └─ dialog.csv # (large file - optional)
+├─ dataset/
+│ └─ train_df_clean.parquet # (artifact - recommended ignore / do not push)
+├─ models/
+│ └─ model_clean.pkl # (tracked by Git LFS recommended)
+├─ payloads/
+│ ├─ benign.csv
+│ ├─ command.csv
+│ ├─ xss.csv
+│ ├─ sqli.jsonl
+│ ├─ brokenAuth.jsonl
+│ └─ test_log.jsonl
+├─ results/
+│ ├─ infer_result.csv
+│ ├─ infer_result.jsonl
+│ ├─ alert_results.csv
+│ └─ alert_results.jsonl
+└─ web/
+├─ attack_tester.html
+└─ alert_dashboard.html
+
 
 🏗 2. Tiền xử lý dữ liệu
 Script: preprocess_clean.py
