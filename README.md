@@ -1,234 +1,272 @@
-1. Chuẩn bị môi trường
-Cài dependencies:
+# 🚨 AI Web Attack Detection System (Model Clean)
+
+An AI-based web attack detection system using **Machine Learning (LightGBM + TF-IDF + Meta-features)**. The system supports:
+
+* SQL Injection
+* XSS
+* Command Injection
+* Broken Authentication
+* Benign traffic
+
+It can run in **offline mode (CLI)** or **realtime mode (WebSocket + Dashboard)**.
+
+---
+
+## 1️⃣ Environment Setup
+
+### Install dependencies
+
+```bash
 pip install -r requirements.txt
+```
 
+### Main libraries
 
-Yêu cầu các thư viện chính:
+* scikit-learn
+* lightgbm
+* pandas
+* scipy
+* rich
+* fastapi
+* uvicorn
 
-scikit-learn
+---
 
-LightGBM
+## 2️⃣ Project Structure
 
-pandas
-
-scipy
-
-rich
-
-Cấu trúc thư mục:
 ```text
-├─ src/
-│ ├─ preprocess_clean.py
-│ ├─ train_clean.py
-│ ├─ infer_clean.py
-│ ├─ alert_parser.py
-│ ├─ alert_ws_server.py
-│ └─ utils_clean.py
+MODEL_OFFICIAL/
 ├─ data/
-│ ├─ SQL.csv
-│ ├─ XSS.csv
-│ └─ dialog.csv # (large file - optional)
+│  ├─ bai.csv
+│  ├─ SQL.csv
+│  ├─ XSS.csv
+│  ├─ commmand.csv
+│  └─ brokenAuth.csv
+│
 ├─ dataset/
-│ └─ train_df_clean.parquet # (artifact - recommended ignore / do not push)
+│  └─ train_df_clean.parquet        # artifact generated after preprocessing
+│
 ├─ models/
-│ └─ model_clean.pkl # (tracked by Git LFS recommended)
+│  └─ model_clean.pkl               # trained model (Git LFS recommended)
+│
 ├─ payloads/
-│ ├─ benign.csv
-│ ├─ command.csv
-│ ├─ xss.csv
-│ ├─ sqli.jsonl
-│ ├─ brokenAuth.jsonl
-│ └─ test_log.jsonl
+│  ├─ benign.csv
+│  ├─ command.csv
+│  ├─ xss.csv
+│  ├─ sqli.jsonl
+│  ├─ brokenAuth.jsonl
+│  └─ test_log.jsonl
+│
 ├─ results/
-│ ├─ infer_result.csv
-│ ├─ infer_result.jsonl
-│ ├─ alert_results.csv
-│ └─ alert_results.jsonl
-└─ web/
-├─ attack_tester.html
-└─ alert_dashboard.html
+│  ├─ infer_result.csv
+│  ├─ infer_result.jsonl
+│  ├─ alert_results.csv
+│  └─ alert_results.jsonl
+│
+├─ src/
+│  ├─ preprocess_clean.py
+│  ├─ train_clean.py
+│  ├─ infer_clean.py
+│  ├─ alert_parser.py
+│  ├─ alert_ws_server.py
+│  ├─ dashboard_api.py
+│  └─ utils_clean.py
+│
+├─ web/
+│  └─ dashboard.html
+│
+└─ README.md
+```
 
+---
 
-🏗 2. Tiền xử lý dữ liệu
-Script: preprocess_clean.py
-(đã nâng cấp — chuẩn hóa text, decode nhiều lớp, sinh meta-feature nâng cao)
+## 3️⃣ Data Preprocessing
 
-Chạy:
+**Script:** `src/preprocess_clean.py`
 
+```bash
 python src/preprocess_clean.py
+```
 
+### Responsibilities
 
-Script sẽ:
+* Load datasets from `data/`
+* Normalize URL + BODY (multi-layer decoding, HTML unescape)
+* Label mapping:
 
-Load dataset trong thư mục data/
+  * 0: Benign
+  * 1: SQL Injection
+  * 2: XSS
+  * 3: Command Injection
+  * 6: Broken Authentication
+* Extract **22+ advanced meta-features**
+* Shuffle dataset
+* Save cleaned dataset
 
-Map lại các nhãn (XSS=2, CMD=3…)
+📦 Output:
 
-Chuẩn hóa URL + BODY (multi-decode, HTML unescape)
-
-Extract hơn 20 meta-features
-
-Shuffle dữ liệu
-
-Lưu file chuẩn hóa:
-
+```
 dataset/train_df_clean.parquet
+```
 
+---
 
-Kết quả kỳ vọng:
+## 4️⃣ Model Training
 
-✔ Dataset saved → dataset/train_df_clean.parquet
-📊 Shape: (XXXX, 26)
-📌 Label counts:
-0: ...
-1: ...
-2: ...
-3: ...
+**Script:** `src/train_clean.py`
 
-
-📌 File tham chiếu: preprocess_clean.py 
-
-preprocess_clean
-
-🤖 3. Train mô hình LightGBM
-
-Script: train_clean.py
-
-Chạy:
-
+```bash
 python src/train_clean.py
+```
 
+### Training Pipeline
 
-Script sẽ:
+* Character-level TF-IDF (2–6 grams)
+* Merge TF-IDF features with meta-features → sparse matrix
+* Data split:
 
-Load dataset parquet
+  * 64% training
+  * 16% validation
+  * 20% testing
+* Train LightGBM (5 classes)
+* Early stopping
 
-TF-IDF vectorize (char-level 2–6gram)
+📦 Output:
 
-Merge meta-features → sparse matrix
-
-Tách: train (64%) / validation (16%) / test (20%)
-
-Huấn luyện LightGBM với early-stopping
-
-Ánh xạ nhãn → {0: Benign, 1: SQL, 2: XSS, 3: CMD}
-
-Lưu model:
-
+```
 models/model_clean.pkl
+```
 
+### Training Output
 
-Kết quả hiển thị:
+* Classification report
+* Confusion matrix
+* Training logs (loss per iteration)
 
-Classification report
+---
 
-Confusion matrix
+## 5️⃣ Payload Testing (CLI)
 
-Loss giảm theo epoch
+**Script:** `src/infer_clean.py`
 
-📌 File tham chiếu: train_clean.py 
-
-train_clean
-
-🔍 4. Kiểm thử payload (CLI Tester)
-
-Script: infer_clean.py
-
-Chạy:
-
+```bash
 python src/infer_clean.py
+```
 
+### Features
 
-Tính năng:
+* Load trained model + TF-IDF
+* Test payloads from JSONL / CSV files
+* Rich-based interactive terminal UI
+* Rank payloads by risk level
+* Export results:
 
-Load model + TF-IDF
+  * `results/infer_result.jsonl`
+  * `results/infer_result.csv`
 
-Giao diện terminal đẹp bằng Rich
+---
 
-Test từ file CSV payload:
+## 6️⃣ Alert Engine (Log Analysis)
 
-payloads/benign.csv
+**Script:** `src/alert_parser.py`
 
-payloads/sqli.csv
+```bash
+python src/alert_parser.py
+```
 
-payloads/xss.csv
+### Capabilities
 
-payloads/command.csv
+* Read JSON / JSONL logs
+* Auto-parse inconsistent or incomplete log formats
+* Run inference + meta-feature analysis
+* Compute **Severity score (0–100)**
+* Severity levels:
 
-Sắp xếp theo độ nguy hiểm
+  * SAFE / LOW / MEDIUM / HIGH / CRITICAL
+* Export alerts:
 
-Hiển thị: label, confidence, probability, payload
+  * `results/alert_results.csv`
+  * `results/alert_results.jsonl`
 
-Ví dụ:
+---
 
-========== PAYLOAD TESTER ==========
-1. Test Benign
-2. Test SQL Injection
-3. Test XSS
-4. Test Command Injection
-5. Thoát
-====================================
+## 7️⃣ Realtime WebSocket & Dashboard
 
+### WebSocket Server
 
-📌 File tham chiếu: infer_clean.py 
+```bash
+uvicorn src.alert_ws_server:app --reload
+```
 
-infer_clean
+* Endpoint: `/ws/alerts`
+* Receive realtime logs
+* Broadcast alerts to dashboard & attack tester
 
-🛠 5. Mô hình hoạt động thế nào?
+### Dashboard API
 
-Model sử dụng 2 nguồn tín hiệu:
+```bash
+uvicorn src.dashboard_api:app --reload
+```
 
-✔ TF-IDF character-level
+* Dashboard: `http://127.0.0.1:8000`
+* APIs:
 
-Bắt các pattern:
+  * `/api/stats`
+  * `/api/events`
 
-' or 1=1 --
+---
 
-<script>
+## 8️⃣ How the Model Works
 
-; ls -la
+### 1. TF-IDF (Character-level)
 
-../../etc/passwd
+Captures malicious patterns such as:
 
-Bypass encode (%27%27%3b)
+* `' or 1=1 --`
+* `<script>alert(1)</script>`
+* `; ls -la`
+* `../../etc/passwd`
+* Multi-encoded payloads
 
-✔ Meta-features (rất quan trọng)
+### 2. Meta-features (Critical signals)
 
-Ví dụ:
+* `entropy`, `base64_chunk_count` → detect obfuscation / encoding
+* `xss_event_count`, `rare_tag_count` → advanced XSS detection
+* `cmd_special_count`, `shell_pattern_count` → command injection
+* `sql_logic_count`, `sql_boolean_ops` → logic-based SQL injection
 
-entropy, base64_chunk_count → detect encode/bypass
+---
 
-xss_event_count, rare_tag_count → detect XSS khó
+## 9️⃣ Microservice Integration
 
-cmd_special_count, shell_pattern_count → detect command injection
+Recommended flow:
 
-sql_logic_count, sql_boolean_ops → detect SQL logic-based
+```
+Client → API Gateway → Security Model → Backend Services
+```
 
-📌 File chức năng: utils_clean.py 
+Example usage:
 
-utils_clean
+```python
+label, confidence = predict(url, body)
+if label != "Benign":
+    block / log / alert
+```
 
-🧪 6. Tích hợp vào Microservice
+---
 
-Model được thiết kế để nhúng vào kiến trúc:
+## 🔟 Quick Commands
 
-Client → API Gateway → Security Model (SQL/XSS/CMD) → Microservices
-
-
-Bạn chỉ cần:
-
-Load model từ models/model_clean.pkl
-
-Gọi hàm predict_url(url, body)
-
-Nếu output ≠ Benign → block / log / alert
-
-🎯 7. Lệnh tóm tắt
-✔ Tiền xử lý
+```bash
+# Preprocess data
 python src/preprocess_clean.py
 
-✔ Train model
+# Train model
 python src/train_clean.py
 
-✔ Test payload
+# Test payloads
 python src/infer_clean.py
+
+# Run alert engine
+python src/alert_parser.py
+
