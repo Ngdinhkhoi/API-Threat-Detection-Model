@@ -273,6 +273,4 @@ python src/infer_clean.py
 python src/alert_parser.py
 ```
 
----
 
-✅ **Hệ thống sẵn sàng triển khai cho SOC, WAF và API Security.**
