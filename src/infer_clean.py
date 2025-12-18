@@ -6,12 +6,14 @@ import joblib
 import os
 import json
 import csv
+from datetime import datetime
+
 from scipy.sparse import csr_matrix, hstack
 from rich.console import Console
 from rich.table import Table
 from rich import box
 
-from src.utils_clean import (
+from utils_clean import (
     normalize_for_tfidf,
     calc_entropy,
     count_special_chars,
@@ -42,7 +44,7 @@ DEFAULT_LABEL_MAP = {
     1: "SQL Injection",
     2: "XSS",
     3: "Command Injection",
-    6: "Broken Authentication"
+    6: "Broken Authentication",
 }
 
 DEFAULT_META_COLS = [
@@ -103,7 +105,6 @@ def preprocess(url, body=""):
 
 def predict(url, body=""):
     bundle = load_model()
-
     model = bundle["model"]
     tfidf = bundle["tfidf"]
     meta_cols = bundle.get("meta_cols", DEFAULT_META_COLS)
@@ -116,6 +117,8 @@ def predict(url, body=""):
 
     probs = model.predict_proba(X)[0]
     idx_model = int(probs.argmax())
+
+    # model có class 4 -> map thành 6 (Broken Authentication)
     idx_label = 6 if idx_model == 4 else idx_model
     prob = float(probs[idx_model] * 100)
 
@@ -123,38 +126,51 @@ def predict(url, body=""):
 
 
 def load_jsonl(path):
+    """Đọc JSONL: có thể có time/ip/url/body. Thiếu time/ip vẫn ok."""
     arr = []
     try:
         with open(path, "r", encoding="utf-8") as f:
             for line in f:
-                if not line.strip(): 
+                if not line.strip():
                     continue
                 item = json.loads(line)
-                arr.append((item.get("url",""), item.get("body","")))
-    except:
+                arr.append({
+                    "time": item.get("time") or item.get("timestamp") or item.get("ts"),
+                    "ip": item.get("ip") or item.get("client_ip") or item.get("remote_ip"),
+                    "url": item.get("url", ""),
+                    "body": item.get("body", ""),
+                })
+    except Exception:
         pass
     return arr
 
 
-def save_csv(results):
+def save_jsonl(records, out="results/infer_result.jsonl"):
     os.makedirs("results", exist_ok=True)
-    out = "results/infer_result.csv"
-    with open(out,"w",encoding="utf-8",newline="") as f:
+    with open(out, "w", encoding="utf-8") as f:
+        for r in records:
+            json.dump(r, f, ensure_ascii=False)
+            f.write("\n")
+    console.print(f"[green]✔ JSONL saved → {out}[/]")
+
+
+def save_csv(results, out="results/infer_result.csv"):
+    os.makedirs("results", exist_ok=True)
+    with open(out, "w", encoding="utf-8", newline="") as f:
         w = csv.writer(f)
-        w.writerow(["label","probability","url","body"])
+        w.writerow(["label", "probability", "url", "body"])
         for label, prob, url, body in results:
             w.writerow([label, f"{prob:.2f}", url, body])
     console.print(f"[green]✔ CSV saved → {out}[/]")
 
 
 def main():
-
     FILES = {
         "1": "payloads/benign.jsonl",
         "2": "payloads/sqli.jsonl",
         "3": "payloads/command.jsonl",
         "4": "payloads/xss.jsonl",
-        "5": "payloads/brokenAuth.jsonl"
+        "5": "payloads/brokenAuth.jsonl",
     }
 
     console.print("[cyan]=== PAYLOAD TESTER (local mode, không WebSocket) ===[/]")
@@ -171,45 +187,86 @@ def main():
     if choice == "7":
         return
 
-    # manual JSON log
+    # ----- manual JSON log -----
     if choice == "6":
         raw = input("Nhập JSON log: ").strip()
         try:
             obj = json.loads(raw)
-            url = obj.get("url","")
-            body = obj.get("body","")
-        except:
+            url = obj.get("url", "")
+            body = obj.get("body", "")
+            t = obj.get("time") or obj.get("timestamp") or datetime.utcnow().isoformat()
+            ip = obj.get("ip") or obj.get("client_ip") or obj.get("remote_ip") or "0.0.0.0"
+        except Exception:
             console.print("[red]JSON không hợp lệ[/]")
             return
 
         label, prob = predict(url, body)
+        record = {
+            "time": t,
+            "ip": ip,
+            "attack": label,
+            "score": round(prob, 2),
+            "url": url,
+            "body": body,
+        }
 
         console.print(f"\n[bold green]→ {label} ({prob:.2f}%)")
-        print("URL :", url)
-        print("BODY:", body)
+        print(json.dumps(record, ensure_ascii=False, indent=2))
         return
 
-    # file mode
+    # ----- file mode -----
     if choice not in FILES:
         console.print("[red]Lựa chọn không hợp lệ[/]")
         return
 
     payloads = load_jsonl(FILES[choice])
-    results = []
 
-    for url, body in payloads:
+    results = []        # để in bảng top
+    jsonl_records = []  # để ghi jsonl
+
+    for item in payloads:
+        url = item.get("url", "")
+        body = item.get("body", "")
+
         label, prob = predict(url, body)
+
+        t = item.get("time") or datetime.utcnow().isoformat()
+        ip = item.get("ip") or "0.0.0.0"
+
+        rec = {
+            "time": t,
+            "ip": ip,
+            "attack": label,
+            "score": round(prob, 2),
+            "url": url,
+            "body": body,
+        }
+        jsonl_records.append(rec)
         results.append((label, prob, url, body))
 
-    save_csv(results)
+    # 1) Ghi full kết quả
+    save_jsonl(jsonl_records, out="results/infer_result.jsonl")
 
+    # 2) Tách riêng suspects: Broken Authentication
+    suspects = [r for r in jsonl_records if r["attack"] == "Broken Authentication"]
+
+    # (tuỳ chọn) lọc thêm score thấp (hay bị nhầm) -> mở comment nếu muốn
+    # suspects = [r for r in suspects if r["score"] < 70]
+
+    save_jsonl(suspects, out="results/suspect_broken_auth.jsonl")
+    console.print(f"[yellow]⚠ Suspects saved: {len(suspects)}[/]")
+
+    # (tuỳ chọn) Nếu muốn CSV thì bật lại
+    # save_csv(results)
+
+    # show top table
     results.sort(key=lambda x: -x[1])
     table = Table(title="TOP PAYLOADS", header_style="bold magenta", box=box.HEAVY_EDGE)
     table.add_column("Label")
     table.add_column("%")
     table.add_column("URL")
 
-    for l,p,u,b in results[:20]:
+    for l, p, u, _b in results[:20]:
         table.add_row(l, f"{p:.2f}", u)
 
     console.print(table)

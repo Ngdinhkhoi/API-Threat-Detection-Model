@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Security Dashboard</title>
+  <style>
+    body{font-family:system-ui,Arial;margin:24px;background:#0b1220;color:#e6edf3}
+    .row{display:flex;gap:16px;flex-wrap:wrap}
+    .card{background:#111a2e;border:1px solid #22304f;border-radius:14px;padding:16px;min-width:240px}
+    .big{font-size:34px;font-weight:800;margin-top:6px}
+    .muted{color:#9fb0cc;font-size:13px}
+    table{width:100%;border-collapse:collapse;margin-top:14px}
+    th,td{border-bottom:1px solid #22304f;padding:10px;text-align:left;font-size:14px}
+    th{color:#9fb0cc;font-weight:600}
+    .pill{padding:2px 8px;border-radius:999px;border:1px solid #22304f}
+    #cards{flex:1}
+  </style>
+</head>
+<body>
+  <h2>Security Dashboard</h2>
+
+  <div class="row">
+    <div id="cards" class="row"></div>
+
+    <div class="card" style="flex:1;min-width:320px">
+      <div class="muted">Nguồn dữ liệu</div>
+      <div id="meta" style="margin-top:6px"></div>
+      <div class="muted" id="updated" style="margin-top:10px"></div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <div><b>Thời điểm / IP tấn công</b></div>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Thời điểm</th>
+          <th>IP</th>
+          <th>Attack</th>
+          <th>Score</th>
+          <th>URL</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </div>
+
+<script>
+const API = "http://127.0.0.1:8000";
+
+function esc(s){
+  return (s ?? "").toString()
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;");
+}
+
+function renderCards(counts){
+  const cards = document.getElementById("cards");
+  const entries = Object.entries(counts || {}).sort((a,b)=>b[1]-a[1]);
+
+  cards.innerHTML = entries.map(([k,v]) => `
+    <div class="card">
+      <div class="muted">${esc(k)} — Bao nhiêu lượt</div>
+      <div class="big">${esc(v)}</div>
+    </div>
+  `).join("");
+}
+
+async function refresh(){
+  const stats = await fetch(`${API}/api/stats`).then(r=>r.json());
+
+  renderCards(stats.counts);
+
+  document.getElementById("meta").innerHTML =
+    `<span class="pill">${esc(stats.file)}</span> &nbsp; <span class="pill">total: ${esc(stats.total)}</span>`;
+  document.getElementById("updated").textContent = `Updated: ${stats.updated_at}`;
+
+  const events = await fetch(`${API}/api/events?limit=50`).then(r=>r.json());
+  const tbody = document.getElementById("tbody");
+  tbody.innerHTML = events.map(e => `
+    <tr>
+      <td>${esc(e.time)}</td>
+      <td>${esc(e.ip)}</td>
+      <td><span class="pill">${esc(e.attack)}</span></td>
+      <td>${esc(e.score)}</td>
+      <td style="max-width:520px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(e.url)}</td>
+    </tr>
+  `).join("");
+}
+
+refresh();
+setInterval(refresh, 2000);
+</script>
+</body>
+</html>

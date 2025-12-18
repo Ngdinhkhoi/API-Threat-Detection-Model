@@ -16,7 +16,7 @@ scipy
 rich
 
 Cấu trúc thư mục:
-
+```text
 ├─ src/
 │ ├─ preprocess_clean.py
 │ ├─ train_clean.py
