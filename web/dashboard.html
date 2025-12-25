@@ -15,6 +15,19 @@
     th{color:#9fb0cc;font-weight:600}
     .pill{padding:2px 8px;border-radius:999px;border:1px solid #22304f}
     #cards{flex:1}
+
+    /* ✅ buttons */
+    .btn{
+      background:#111a2e;
+      border:1px solid #22304f;
+      color:#e6edf3;
+      padding:8px 10px;
+      border-radius:10px;
+      cursor:pointer;
+      font-size:13px;
+    }
+    .btn:hover{filter:brightness(1.08)}
+    .btn.active{border-color:#5b86ff}
   </style>
 </head>
 <body>
@@ -31,8 +44,15 @@
   </div>
 
   <div class="card" style="margin-top:16px">
-    <div style="display:flex;justify-content:space-between;align-items:center">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
       <div><b>Thời điểm / IP tấn công</b></div>
+
+      <!-- ✅ Sort buttons -->
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn" id="sortTime">Mới → cũ</button>
+        <button class="btn" id="sortScoreDesc">Điểm cao → thấp</button>
+        <button class="btn" id="sortScoreAsc">Điểm thấp → cao</button>
+      </div>
     </div>
 
     <table>
@@ -52,11 +72,30 @@
 <script>
 const API = "http://127.0.0.1:8000";
 
+// ✅ sort state
+let SORT_MODE = "time_desc"; // "time_desc" | "score_desc" | "score_asc"
+
 function esc(s){
   return (s ?? "").toString()
     .replaceAll("&","&amp;")
     .replaceAll("<","&lt;")
     .replaceAll(">","&gt;");
+}
+
+function num(x){
+  const n = Number(x);
+  return Number.isFinite(n) ? n : -Infinity;
+}
+
+function ts(x){
+  const t = Date.parse(x || "");
+  return Number.isFinite(t) ? t : 0;
+}
+
+function setActive(){
+  document.getElementById("sortTime").classList.toggle("active", SORT_MODE==="time_desc");
+  document.getElementById("sortScoreDesc").classList.toggle("active", SORT_MODE==="score_desc");
+  document.getElementById("sortScoreAsc").classList.toggle("active", SORT_MODE==="score_asc");
 }
 
 function renderCards(counts){
@@ -81,6 +120,16 @@ async function refresh(){
   document.getElementById("updated").textContent = `Updated: ${stats.updated_at}`;
 
   const events = await fetch(`${API}/api/events?limit=50`).then(r=>r.json());
+
+  // ✅ sort events by chosen mode
+  if (SORT_MODE === "time_desc"){
+    events.sort((a,b) => ts(b.time) - ts(a.time));
+  } else if (SORT_MODE === "score_desc"){
+    events.sort((a,b) => num(b.score) - num(a.score));
+  } else if (SORT_MODE === "score_asc"){
+    events.sort((a,b) => num(a.score) - num(b.score));
+  }
+
   const tbody = document.getElementById("tbody");
   tbody.innerHTML = events.map(e => `
     <tr>
@@ -93,6 +142,12 @@ async function refresh(){
   `).join("");
 }
 
+// ✅ button handlers
+document.getElementById("sortTime").onclick = () => { SORT_MODE="time_desc"; setActive(); refresh(); };
+document.getElementById("sortScoreDesc").onclick = () => { SORT_MODE="score_desc"; setActive(); refresh(); };
+document.getElementById("sortScoreAsc").onclick = () => { SORT_MODE="score_asc"; setActive(); refresh(); };
+
+setActive();
 refresh();
 setInterval(refresh, 2000);
 </script>
