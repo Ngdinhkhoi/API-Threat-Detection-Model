@@ -13,7 +13,7 @@ from rich.console import Console
 from rich.table import Table
 from rich import box
 
-from utils_clean import (
+from src.utils_clean import (
     normalize_for_tfidf,
     calc_entropy,
     count_special_chars,
@@ -173,6 +173,12 @@ def main():
         "5": "payloads/brokenAuth.jsonl",
     }
 
+    # ✅ expected label theo bộ test (trước mắt: SQLi và BrokenAuth)
+    EXPECTED_ATTACK = {
+        "2": "SQL Injection",
+        "5": "Broken Authentication",
+    }
+
     console.print("[cyan]=== PAYLOAD TESTER (local mode, không WebSocket) ===[/]")
     print("1. Test benign.jsonl")
     print("2. Test sqli.jsonl")
@@ -224,6 +230,9 @@ def main():
     results = []        # để in bảng top
     jsonl_records = []  # để ghi jsonl
 
+    expected = EXPECTED_ATTACK.get(choice)   # None nếu không phải 2/5
+    misclassified = []                      # ✅ record nhận nhầm
+
     for item in payloads:
         url = item.get("url", "")
         body = item.get("body", "")
@@ -244,20 +253,27 @@ def main():
         jsonl_records.append(rec)
         results.append((label, prob, url, body))
 
+        # ✅ nếu đang test SQLi/BrokenAuth mà predict khác expected -> nhận nhầm
+        if expected is not None and label != expected:
+            misclassified.append(rec)
+
     # 1) Ghi full kết quả
     save_jsonl(jsonl_records, out="results/infer_result.jsonl")
 
-    # 2) Tách riêng suspects: Broken Authentication
+    # ✅ NEW: Ghi file nhận nhầm cho SQLi/BrokenAuth
+    if expected is not None:
+        out_path = (
+            "results/misclassified_sqli.jsonl"
+            if choice == "2"
+            else "results/misclassified_broken_auth.jsonl"
+        )
+        save_jsonl(misclassified, out=out_path)
+        console.print(f"[red]✖ Misclassified saved: {len(misclassified)} → {out_path}[/]")
+
+    # 2) Tách riêng suspects: Broken Authentication (giữ như cũ)
     suspects = [r for r in jsonl_records if r["attack"] == "Broken Authentication"]
-
-    # (tuỳ chọn) lọc thêm score thấp (hay bị nhầm) -> mở comment nếu muốn
-    # suspects = [r for r in suspects if r["score"] < 70]
-
     save_jsonl(suspects, out="results/suspect_broken_auth.jsonl")
     console.print(f"[yellow]⚠ Suspects saved: {len(suspects)}[/]")
-
-    # (tuỳ chọn) Nếu muốn CSV thì bật lại
-    # save_csv(results)
 
     # show top table
     results.sort(key=lambda x: -x[1])

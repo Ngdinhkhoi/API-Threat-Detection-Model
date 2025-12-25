@@ -8,3 +8,5 @@
 {"time": "2025-11-28T12:03:02Z", "ip": "10.2.0.62", "attack": "Broken Authentication", "score": 55.29, "url": "/broken?id=%BF%27OR%271=1", "body": ""}
 {"time": "2025-11-28T12:10:10Z", "ip": "10.3.0.10", "attack": "Broken Authentication", "score": 58.92, "url": "/user?id=10%20AND%20TRUE", "body": ""}
 {"time": "2025-11-28T12:10:11Z", "ip": "10.3.0.11", "attack": "Broken Authentication", "score": 51.12, "url": "/user?id=10%20AND%20FALSE", "body": ""}
+{"time": "2025-11-28T12:10:41Z", "ip": "10.3.0.41", "attack": "XSS", "score": 63.13, "url": "/path?id=..%2f..%2f%27OR%271%3d1", "body": ""}
+{"time": "2025-11-28T12:20:49Z", "ip": "10.4.0.49", "attack": "XSS", "score": 36.93, "url": "/stack?id=1;%20SHOW%20DATABASES", "body": ""}

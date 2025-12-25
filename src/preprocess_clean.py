@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
-# preprocess_clean.py (FINAL 5-CLASS EDITION — FULL SAFE PARSER)
+# preprocess_clean.py (FIXED — BROKENAUTOH CSV MULTILINE SAFE)
 
 import os
+import csv
 import pandas as pd
 
 from src.utils_clean import (
@@ -30,21 +31,18 @@ from src.utils_clean import (
 
 INPUT_DIR = "data"
 
-# ==================================================================
-# 5-CLASS — Broken Authentication thêm class 4
-# ==================================================================
 DESIRED_LABEL = {
     "bai.csv": 0,             # Benign
     "SQL.csv": 1,             # SQL Injection
     "XSS.csv": 2,             # XSS
     "commmand.csv": 3,        # Command Injection
-    "brokenAuth.csv": 6       # NEW — Broken Authentication
+    "brokenAuth.csv": 6       # Broken Authentication
 }
 
-NORMALIZE_LABEL = {str(i): i for i in range(5)}
-NORMALIZE_LABEL.update({i: i for i in range(5)})
+# map cho label dạng string "0"..."6" (nếu có cột lable)
+NORMALIZE_LABEL = {str(i): i for i in range(7)}
+NORMALIZE_LABEL.update({i: i for i in range(7)})
 
-# META FEATURES — phải trùng 100% với train_clean.py + infer_clean.py
 META_COLS = [
     "url_length", "entropy", "num_special", "special_ratio",
     "longest_special_seq",
@@ -57,34 +55,53 @@ META_COLS = [
     "sql_logic_count",
 ]
 
-
-
 # ==================================================================
-# SPECIAL PARSER — dành cho brokenAuth.csv (CSV lỗi)
+# FIXED PARSER — dành cho brokenAuth.csv (multiline JSON body)
 # ==================================================================
-def parse_broken_auth(path):
+def parse_broken_auth(path: str) -> pd.DataFrame:
     rows = []
-    with open(path, "r", encoding="utf-8") as f:
-        for line in f:
-            line = line.rstrip("\n")
-            parts = line.split(",", 6)   # split đúng 7 trường
-            if len(parts) != 7:
-                print("⚠️ Skip malformed:", line)
+
+    # newline="" rất quan trọng để csv.reader xử lý multiline field đúng
+    with open(path, "r", encoding="utf-8", newline="") as f:
+        reader = csv.reader(f, delimiter=",", quotechar='"', escapechar="\\")
+
+        first = next(reader, None)
+        if first is None:
+            return pd.DataFrame(columns=["id","method","user_agent","url","referer","body","label"])
+
+        # Detect header
+        first_lower = [c.strip().lower() for c in first]
+        has_header = ("id" in first_lower and "method" in first_lower and ("label" in first_lower or "lable" in first_lower))
+
+        def normalize_row(row):
+            # Mong muốn 7 cột: id,method,user_agent,url,referer,body,label
+            # Nếu body chứa dấu phẩy và file không quote chuẩn → row có thể > 7 cột
+            if len(row) > 7:
+                body = ",".join(row[5:-1])
+                row = row[:5] + [body, row[-1]]
+            return row
+
+        if not has_header:
+            row = normalize_row(first)
+            if len(row) == 7:
+                rows.append(row)
+
+        for row in reader:
+            row = normalize_row(row)
+            if len(row) != 7:
+                # bỏ những record thực sự hỏng (rất hiếm sau khi dùng csv.reader)
+                print("⚠️ Skip malformed:", row[:3], "... (cols=", len(row), ")")
                 continue
-            rows.append(parts)
+            rows.append(row)
 
-    df = pd.DataFrame(
-        rows,
-        columns=["id", "method", "user_agent", "url", "referer", "body", "label"]
-    )
+    df = pd.DataFrame(rows, columns=["id","method","user_agent","url","referer","body","label"])
     return df
-
-
 
 # ==================================================================
 # ASSIGN LABEL
 # ==================================================================
 def assign_label(df: pd.DataFrame, fname: str) -> pd.DataFrame:
+    # Nếu file có cột 'lable' (sai chính tả) thì ưu tiên dùng nó
     if "lable" in df.columns:
         df["lable"] = df["lable"].astype(str).str.strip()
         df["label"] = df["lable"].map(NORMALIZE_LABEL)
@@ -93,12 +110,11 @@ def assign_label(df: pd.DataFrame, fname: str) -> pd.DataFrame:
             print(f"⚠️ {fname}: {invalid} label invalid → auto-fix")
             df.loc[df["label"].isna(), "label"] = DESIRED_LABEL[fname]
     else:
+        # Nếu không có label/lable → gán label theo file
         df["label"] = DESIRED_LABEL[fname]
 
-    df["label"] = df["label"].astype(int)
+    df["label"] = pd.to_numeric(df["label"], errors="coerce").fillna(DESIRED_LABEL[fname]).astype(int)
     return df
-
-
 
 # ==================================================================
 # BUILD DATASET
@@ -110,11 +126,11 @@ def build_dataset():
         path = os.path.join(INPUT_DIR, fname)
         print(f"📂 Loading {path}")
 
-        # BrokenAuth.csv cần parser đặc biệt
         if fname == "brokenAuth.csv":
             df = parse_broken_auth(path)
         else:
-            df = pd.read_csv(path, on_bad_lines="skip")
+            # engine="python" đôi khi đọc “bẩn” tốt hơn
+            df = pd.read_csv(path, on_bad_lines="skip", engine="python")
 
         # Chuẩn hóa field
         df["id"] = df["id"].astype(str) if "id" in df.columns else ""
@@ -169,7 +185,6 @@ def build_dataset():
     print("✔ DONE → dataset/train_df_clean.parquet")
     print("📊 Shape:", out_df.shape)
     print("📌 Label counts:\n", out_df["label"].value_counts())
-
 
 if __name__ == "__main__":
     build_dataset()

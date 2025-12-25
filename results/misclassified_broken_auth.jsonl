@@ -1,0 +1,8 @@
+{"time": "2025-01-10T09:00:26Z", "ip": "172.18.0.15", "attack": "XSS", "score": 40.77, "url": "/auth/login", "body": "username=doesnotexist&password=test123"}
+{"time": "2025-01-10T09:00:41Z", "ip": "172.18.0.18", "attack": "SQL Injection", "score": 43.33, "url": "/oauth/token", "body": "grant_type=password&client_id=web&username=admin&password=admin"}
+{"time": "2025-01-10T09:00:46Z", "ip": "172.18.0.19", "attack": "SQL Injection", "score": 33.35, "url": "/oauth/token", "body": "grant_type=password&client_id=web&username=user&password=123456"}
+{"time": "2025-01-10T09:00:51Z", "ip": "172.18.0.20", "attack": "XSS", "score": 40.87, "url": "/auth/refresh", "body": "refresh_token=deadbeef&client_id=web"}
+{"time": "2025-01-10T09:00:56Z", "ip": "172.18.0.21", "attack": "XSS", "score": 49.24, "url": "/auth/refresh", "body": "refresh_token=invalidtoken&client_id=web"}
+{"time": "2025-01-10T09:06:06Z", "ip": "172.18.1.23", "attack": "SQL Injection", "score": 47.43, "url": "/auth/session/validate", "body": "session_id=000000"}
+{"time": "2025-01-10T09:06:11Z", "ip": "172.18.1.24", "attack": "XSS", "score": 58.24, "url": "/auth/password/reset", "body": "username=admin"}
+{"time": "2025-01-10T09:06:16Z", "ip": "172.18.1.25", "attack": "XSS", "score": 51.83, "url": "/auth/password/reset", "body": "username=unknownuser"}

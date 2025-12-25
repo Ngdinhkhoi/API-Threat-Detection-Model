@@ -59,7 +59,15 @@ def stats():
 def events(limit: int = 100):
     rows = read_jsonl(APP_FILE)
 
-    rows = sorted(rows, key=lambda r: r.get("time", ""), reverse=True)
+    
+    def score_value(r):
+        s = r.get("score", 0)
+        try:
+            return float(s)
+        except Exception:
+            return 0.0
+
+    rows = sorted(rows, key=score_value, reverse=True)
 
     out = []
     for r in rows[:limit]:
