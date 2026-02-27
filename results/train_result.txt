@@ -1,0 +1,31 @@
+Time: 2026-01-29T18:54:34
+Random state: 42
+Rows after dedup: 59007
+Split sizes (train/val/test): 35403/11802/11802
+TFIDF features: 2000
+Total features: 2033
+Best iteration: 1000
+
+==== METRICS (macro) ====
+Accuracy : 0.998729
+Precision: 0.993738
+Recall   : 0.999277
+F1-score : 0.996475
+AUC-ROC  : 0.999991
+
+              precision    recall  f1-score   support
+
+           0     0.9990    0.9981    0.9986      5213
+           1     0.9986    0.9990    0.9988      5142
+           2     1.0000    1.0000    1.0000      1318
+           3     0.9773    1.0000    0.9885       129
+
+    accuracy                         0.9987     11802
+   macro avg     0.9937    0.9993    0.9965     11802
+weighted avg     0.9987    0.9987    0.9987     11802
+
+Confusion matrix:
+[[5203    7    0    3]
+ [   5 5137    0    0]
+ [   0    0 1318    0]
+ [   0    0    0  129]]

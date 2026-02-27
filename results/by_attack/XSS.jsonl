@@ -1,0 +1,10 @@
+{"time": "2026-01-08T14:23:22.992035+00:00", "ip": "0.0.0.0", "attack": "XSS", "score": 98.04, "url": "/viewer?id=<svg/onload=alert(screenY)>", "body": ""}
+{"time": "2026-01-08T14:23:22.991907+00:00", "ip": "0.0.0.0", "attack": "XSS", "score": 99.97, "url": "/admin?u=<img src=x onerror=alert(/XSS/.source)>", "body": ""}
+{"time": "2026-01-08T14:23:22.991502+00:00", "ip": "0.0.0.0", "attack": "XSS", "score": 99.97, "url": "/form?input=%3Cscript%3Ealert(1)%3C/script%3E", "body": ""}
+{"time": "2026-01-08T14:23:22.991962+00:00", "ip": "0.0.0.0", "attack": "XSS", "score": 99.95, "url": "/frame?cb=<iframe onload=alert(parent)>", "body": ""}
+{"time": "2026-01-08T14:23:22.991666+00:00", "ip": "0.0.0.0", "attack": "XSS", "score": 99.97, "url": "/view?data=<math href=javascript:alert(1)>", "body": ""}
+{"time": "2026-01-08T14:23:22.991656+00:00", "ip": "0.0.0.0", "attack": "XSS", "score": 99.97, "url": "/msg?q=<script>eval('alert(1)')</script>", "body": ""}
+{"time": "2026-01-08T14:23:22.992024+00:00", "ip": "0.0.0.0", "attack": "XSS", "score": 99.97, "url": "/screen?x=<script>alert(screen.height)</script>", "body": ""}
+{"time": "2026-01-08T14:23:22.991490+00:00", "ip": "0.0.0.0", "attack": "XSS", "score": 99.97, "url": "/view?data=<iframe src=javascript:alert(1)>", "body": "ref=page"}
+{"time": "2026-01-08T14:23:22.992002+00:00", "ip": "0.0.0.0", "attack": "XSS", "score": 99.92, "url": "/test?id=<svg/onload=alert(document.lastModified)>", "body": ""}
+{"time": "2026-01-08T14:23:22.991559+00:00", "ip": "0.0.0.0", "attack": "XSS", "score": 99.85, "url": "/x?x=<object data=javascript:alert(1)>", "body": ""}

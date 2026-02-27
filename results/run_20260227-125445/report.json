@@ -1,0 +1,83 @@
+{
+  "run_id": "20260227-125445",
+  "time": "2026-02-27T12:54:45",
+  "random_state": 42,
+  "use_source_split": true,
+  "use_meta_only": false,
+  "split_sizes": {
+    "train": 18715,
+    "val": 6239,
+    "test": 5291
+  },
+  "sources": {
+    "train_sources": [
+      "BOLA_train.csv",
+      "SQL.csv",
+      "XSS.csv",
+      "bai.csv"
+    ],
+    "test_sources": [
+      "BOLA_test.csv",
+      "XSS_cus.csv",
+      "brokenAuth.csv"
+    ]
+  },
+  "auc_roc": NaN,
+  "threshold_results": [
+    {
+      "threshold": 0.5,
+      "accuracy": 0.8697788697788698,
+      "precision": 1.0,
+      "recall": 0.8697788697788698,
+      "f1": 0.9303547963206308,
+      "confusion_matrix": [
+        [
+          0,
+          0
+        ],
+        [
+          689,
+          4602
+        ]
+      ],
+      "classification_report": "              precision    recall  f1-score   support\n\n           0     0.0000    0.0000    0.0000         0\n           1     1.0000    0.8698    0.9304      5291\n\n    accuracy                         0.8698      5291\n   macro avg     0.5000    0.4349    0.4652      5291\nweighted avg     1.0000    0.8698    0.9304      5291\n"
+    },
+    {
+      "threshold": 0.3,
+      "accuracy": 0.872991872991873,
+      "precision": 1.0,
+      "recall": 0.872991872991873,
+      "f1": 0.9321897073662967,
+      "confusion_matrix": [
+        [
+          0,
+          0
+        ],
+        [
+          672,
+          4619
+        ]
+      ],
+      "classification_report": "              precision    recall  f1-score   support\n\n           0     0.0000    0.0000    0.0000         0\n           1     1.0000    0.8730    0.9322      5291\n\n    accuracy                         0.8730      5291\n   macro avg     0.5000    0.4365    0.4661      5291\nweighted avg     1.0000    0.8730    0.9322      5291\n"
+    },
+    {
+      "threshold": 0.2,
+      "accuracy": 0.87998487998488,
+      "precision": 1.0,
+      "recall": 0.87998487998488,
+      "f1": 0.936161656780939,
+      "confusion_matrix": [
+        [
+          0,
+          0
+        ],
+        [
+          635,
+          4656
+        ]
+      ],
+      "classification_report": "              precision    recall  f1-score   support\n\n           0     0.0000    0.0000    0.0000         0\n           1     1.0000    0.8800    0.9362      5291\n\n    accuracy                         0.8800      5291\n   macro avg     0.5000    0.4400    0.4681      5291\nweighted avg     1.0000    0.8800    0.9362      5291\n"
+    }
+  ],
+  "text_report": "Run ID: 20260227-125445\nTime: 2026-02-27T12:54:45\nRandom state: 42\nUSE_SOURCE_SPLIT: True\nUSE_META_ONLY: False\nSplit (train/val/test): 18715/6239/5291\nTRAIN_SOURCES: ['BOLA_train.csv', 'SQL.csv', 'XSS.csv', 'bai.csv']\nTEST_SOURCES : ['BOLA_test.csv', 'XSS_cus.csv', 'brokenAuth.csv']\nAUC-ROC: nan\n\n==== THRESHOLD = 0.5 ====\nAccuracy : 0.869779\nPrecision: 1.000000\nRecall   : 0.869779\nF1-score : 0.930355\nConfusion matrix:\n[[   0    0]\n [ 689 4602]]\nClassification report:\n              precision    recall  f1-score   support\n\n           0     0.0000    0.0000    0.0000         0\n           1     1.0000    0.8698    0.9304      5291\n\n    accuracy                         0.8698      5291\n   macro avg     0.5000    0.4349    0.4652      5291\nweighted avg     1.0000    0.8698    0.9304      5291\n\n\n==== THRESHOLD = 0.3 ====\nAccuracy : 0.872992\nPrecision: 1.000000\nRecall   : 0.872992\nF1-score : 0.932190\nConfusion matrix:\n[[   0    0]\n [ 672 4619]]\nClassification report:\n              precision    recall  f1-score   support\n\n           0     0.0000    0.0000    0.0000         0\n           1     1.0000    0.8730    0.9322      5291\n\n    accuracy                         0.8730      5291\n   macro avg     0.5000    0.4365    0.4661      5291\nweighted avg     1.0000    0.8730    0.9322      5291\n\n\n==== THRESHOLD = 0.2 ====\nAccuracy : 0.879985\nPrecision: 1.000000\nRecall   : 0.879985\nF1-score : 0.936162\nConfusion matrix:\n[[   0    0]\n [ 635 4656]]\nClassification report:\n              precision    recall  f1-score   support\n\n           0     0.0000    0.0000    0.0000         0\n           1     1.0000    0.8800    0.9362      5291\n\n    accuracy                         0.8800      5291\n   macro avg     0.5000    0.4400    0.4681      5291\nweighted avg     1.0000    0.8800    0.9362      5291\n\n"
+}

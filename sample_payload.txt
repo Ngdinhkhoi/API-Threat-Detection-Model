@@ -1,0 +1,12 @@
+Broken Authentication
+
+{"timestamp":"2025-12-01T08:15:02+00:00","remote_ip":"172.18.0.30","method":"POST","url":"/auth/login","status":"401","user_agent":"Mozilla/5.0","body":"username=admin&password=admin123"}
+{"timestamp":"2025-12-01T08:15:11+00:00","remote_ip":"172.18.0.31","method":"POST","url":"/auth/login","status":"401","user_agent":"Mozilla/5.0","body":"username=administrator&password=password"}
+{"timestamp":"2025-12-01T08:15:25+00:00","remote_ip":"172.18.0.32","method":"POST","url":"/auth/session","status":"403","user_agent":"Mozilla/5.0","body":"session_id=abc123&user=admin"}
+
+
+{"timestamp":"2025-12-05T03:12:44+00:00","remote_ip":"10.10.10.10","method":"POST","url":"/auth/login","status":"401","user_agent":"PostmanRuntime/7.50.0","body":"username=admin'--&password=admin"}
+
+SQLi 
+
+{"timestamp":"2025-12-06T14:56:03+00:00","remote_ip":"172.30.0.6","method":"POST","url":"/auth/login","status":"500","user_agent":"Mozilla/5.0","body":"username=test&password=123456 UNION SELECT NULL,NULL"}
